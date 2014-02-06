@@ -1,0 +1,114 @@
+// Copyright (c) 2009-2010 Satoshi Nakamoto
+// Copyright (c) 2009-2012 The Bitcoin developers
+// Copyright (c) 2014 The MaxCoin devopers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#ifndef BITCOIN_HASH_H
+#define BITCOIN_HASH_H
+
+#include "uint256.h"
+#include "serialize.h"
+#include "sph_keccak.h"
+#include <openssl/sha.h>
+#include <openssl/ripemd.h>
+#include <vector>
+#include <string>
+
+#include "schnorr.h"
+
+template<typename T1>
+inline uint256 HashKeccak(const T1 pbegin, const T1 pend)
+{
+    sph_keccak256_context ctx_keccak;
+    static unsigned char pblank[1];
+    uint256 hash;
+
+    sph_keccak256_init(&ctx_keccak);
+    sph_keccak256 (&ctx_keccak, (pbegin == pend ? pblank : static_cast<const void*>(&pbegin[0])), (pend - pbegin) * sizeof(pbegin[0]));
+    sph_keccak256_close(&ctx_keccak, static_cast<void*>(&hash));
+
+    // TODO: replace with Crypto++ function
+
+    return hash;
+}
+
+class CHashWriter
+{
+private:
+    SHA256_CTX ctx;
+    //const static int digestsize = 256/8;
+    //CryptoPP::SHA3_256 sha_ctx;
+
+public:
+    int nType;
+    int nVersion;
+
+    void Init() {
+        SHA256_Init(&ctx);
+    }
+
+    CHashWriter(int nTypeIn, int nVersionIn) : nType(nTypeIn), nVersion(nVersionIn) {
+        Init();
+    }
+
+    CHashWriter& write(const char *pch, size_t size) {
+        SHA256_Update(&ctx, pch, size);
+        //sha_ctx.Update((unsigned char*)&pch, size);
+        return (*this);
+    }
+
+    // invalidates the object
+    uint256 GetHash() {
+        uint256 hash1;
+        SHA256_Final((unsigned char*)&hash1, &ctx);
+        //byte digest[digestsize];
+        //sha_ctx.Final(digest);
+        // TODO - convert digest to uint256
+        return hash1;
+    }
+
+    template<typename T>
+    CHashWriter& operator<<(const T& obj) {
+        // Serialize to this stream
+        ::Serialize(*this, obj, nType, nVersion);
+        return (*this);
+    }
+};
+
+template<typename T1, typename T2>
+inline uint256 Hash4(const T1 p1begin, const T1 p1end,
+                    const T2 p2begin, const T2 p2end)
+{
+    static unsigned char pblank[1];
+    uint256 hash1;
+    SHA256_CTX ctx;
+    SHA256_Init(&ctx);
+    SHA256_Update(&ctx, (p1begin == p1end ? pblank : (unsigned char*)&p1begin[0]), (p1end - p1begin) * sizeof(p1begin[0]));
+    SHA256_Update(&ctx, (p2begin == p2end ? pblank : (unsigned char*)&p2begin[0]), (p2end - p2begin) * sizeof(p2begin[0]));
+    SHA256_Final((unsigned char*)&hash1, &ctx);
+    uint256 hash2;
+    SHA256((unsigned char*)&hash1, sizeof(hash1), (unsigned char*)&hash2);
+    return hash2;
+}
+
+template<typename T>
+uint256 SerializeHash(const T& obj, int nType=SER_GETHASH, int nVersion=PROTOCOL_VERSION)
+{
+    CHashWriter ss(nType, nVersion);
+    ss << obj;
+    return ss.GetHash();
+}
+
+inline uint160 Hash160(const std::vector<unsigned char>& vch)
+{
+    uint256 hash1;
+    SHA256(&vch[0], vch.size(), (unsigned char*)&hash1);
+    // TODO: HashKeccak(...)
+    uint160 hash2;
+    RIPEMD160((unsigned char*)&hash1, sizeof(hash1), (unsigned char*)&hash2);
+    return hash2;
+}
+
+unsigned int MurmurHash3(unsigned int nHashSeed, const std::vector<unsigned char>& vDataToHash);
+
+#endif
