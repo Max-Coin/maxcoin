@@ -1,7 +1,7 @@
 CXXFLAGS = -DNDEBUG -g -O2
 # -O3 fails to link on Cygwin GCC version 4.5.3
 # -fPIC is supported. Please report any breakage of -fPIC as a bug.
-CXXFLAGS += -fPIC
+# CXXFLAGS += -fPIC
 # the following options reduce code size, but breaks link or makes link very slow on some systems
 # CXXFLAGS += -ffunction-sections -fdata-sections
 # LDFLAGS += -Wl,--gc-sections
@@ -38,8 +38,8 @@ GAS219_OR_LATER = $(shell $(CXX) -xc -c /dev/null -Wa,-v -o/dev/null 2>&1 | $(EG
 ifneq ($(GCC42_OR_LATER),0)
 ifeq ($(UNAME),Darwin)
 CXXFLAGS += -arch x86_64 -arch i386
-else
-CXXFLAGS += -march=native
+#else
+#CXXFLAGS += -march=i386
 endif
 endif
 

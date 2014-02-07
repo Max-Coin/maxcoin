@@ -112,7 +112,7 @@ xCXXFLAGS=-O2 -pthread -Wall -Wextra -Wformat -Wformat-security -Wno-unused-para
 xLDFLAGS=$(LDHARDENING) $(LDFLAGS)
 
 OBJS= \
-		cryptopp/libcryptopp.a \
+    cryptopp/libcryptopp.a \
     leveldb/libleveldb.a \
     obj/alert.o \
     obj/version.o \
@@ -145,9 +145,6 @@ OBJS= \
     obj/leveldb.o \
     obj/txdb.o\
     obj/keccak.o
-
-
-	
 
 
 all: obj maxcoind
@@ -193,7 +190,7 @@ obj:
 	-mkdir -p obj
 
 cryptopp/libcryptopp.a:
-	@$(MAKE) -C cryptopp
+	@$(MAKE) -C cryptopp static
 
 maxcoind: $(OBJS:obj/%=obj/%)
 	$(LINK) $(xCXXFLAGS) -o $@ $^ $(xLDFLAGS) $(LIBS)
