@@ -27,8 +27,6 @@ inline uint256 HashKeccak(const T1 pbegin, const T1 pend)
     sph_keccak256 (&ctx_keccak, (pbegin == pend ? pblank : static_cast<const void*>(&pbegin[0])), (pend - pbegin) * sizeof(pbegin[0]));
     sph_keccak256_close(&ctx_keccak, static_cast<void*>(&hash));
 
-    // TODO: replace with Crypto++ function
-
     return hash;
 }
 
@@ -36,8 +34,6 @@ class CHashWriter
 {
 private:
     SHA256_CTX ctx;
-    //const static int digestsize = 256/8;
-    //CryptoPP::SHA3_256 sha_ctx;
 
 public:
     int nType;
@@ -53,7 +49,6 @@ public:
 
     CHashWriter& write(const char *pch, size_t size) {
         SHA256_Update(&ctx, pch, size);
-        //sha_ctx.Update((unsigned char*)&pch, size);
         return (*this);
     }
 
@@ -61,9 +56,6 @@ public:
     uint256 GetHash() {
         uint256 hash1;
         SHA256_Final((unsigned char*)&hash1, &ctx);
-        //byte digest[digestsize];
-        //sha_ctx.Final(digest);
-        // TODO - convert digest to uint256
         return hash1;
     }
 
@@ -103,7 +95,6 @@ inline uint160 Hash160(const std::vector<unsigned char>& vch)
 {
     uint256 hash1;
     SHA256(&vch[0], vch.size(), (unsigned char*)&hash1);
-    // TODO: HashKeccak(...)
     uint160 hash2;
     RIPEMD160((unsigned char*)&hash1, sizeof(hash1), (unsigned char*)&hash2);
     return hash2;
