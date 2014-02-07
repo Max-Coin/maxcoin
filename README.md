@@ -22,7 +22,7 @@ Notable differences from Bitcoin
 Modifications to the RPC API
 + verifymessage <maxcoinaddress> <publickey> <signature> <message>
 
-Forked from Bitcoin reference wallet 0.8.5
+Forked from Bitcoin reference wallet 0.8.5 and Blakecoin
 
 License
 ------
