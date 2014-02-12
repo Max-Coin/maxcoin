@@ -107,8 +107,8 @@ void MiningPage::startPoolMining()
 {
     QStringList args;
     QString url = ui->serverLine->text();
-    if (!url.contains("http://"))
-        url.prepend("http://");
+    if (!url.contains("http://") || !url.contains("tcp://"))
+        url.prepend("stratum+tcp://");
     QString urlLine = QString("%1:%2").arg(url, ui->portLine->text());
     QString userpassLine = QString("%1:%2").arg(ui->usernameLine->text(), ui->passwordLine->text());
     args << "--algo" << "keccak";
