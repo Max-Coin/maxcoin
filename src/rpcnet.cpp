@@ -1,9 +1,12 @@
 // Copyright (c) 2009-2012 Bitcoin Developers
+// Copyright (c) 2014 MaxCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "net.h"
 #include "bitcoinrpc.h"
+#include "base58.h"
+#include "util.h"
 
 using namespace json_spirit;
 using namespace std;
@@ -203,5 +206,42 @@ Value getaddednodeinfo(const Array& params, bool fHelp)
     }
 
     return ret;
+}
+
+// Ported from Primecoin
+Value makekeypair(const Array& params, bool fHelp)
+{
+    if (fHelp || params.size() > 1)
+        throw runtime_error(
+            "makekeypair [prefix]\n"
+            "Make a public/private key pair.\n"
+            "[prefix] is optional base64-encoded prefix for the public key.\n");
+
+    string strPrefix = "";
+    if (params.size() > 0)
+        strPrefix = params[0].get_str();
+
+    CKey key;
+    CPubKey pubKey;
+    std::vector<unsigned char> vchPubKey;
+    int nCount = 0;
+    do
+    {
+        key.MakeNewKey(false);
+        pubKey = key.GetPubKey();
+        vchPubKey = pubKey.Raw();
+        nCount++;
+    } while (nCount < 10000 && strPrefix != EncodeBase64(&vchPubKey[0], vchPubKey.size()).substr(0, strPrefix.size()));
+
+    if (strPrefix != EncodeBase64(&vchPubKey[0], vchPubKey.size()).substr(0, strPrefix.size()))
+        return Value::null;
+
+    bool isCompressed;
+    CSecret secretKey = key.GetSecret(isCompressed);
+
+    Object result;
+    result.push_back(Pair("PublicKey",  EncodeBase64(&vchPubKey[0], vchPubKey.size())));
+    result.push_back(Pair("PrivateKey", CBitcoinSecret(secretKey, isCompressed).ToString()));
+    return result;
 }
 

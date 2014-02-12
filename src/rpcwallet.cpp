@@ -354,14 +354,10 @@ Value verifymessage(const Array& params, bool fHelp)
             "verifymessage <maxcoinaddress> <publickey> <signature> <message>\n"
             "Verify a signed message");
 
-    
-
     string strAddress  = params[0].get_str();
     string strPubKey   = params[1].get_str();
     string strSign     = params[2].get_str();
     string strMessage  = params[3].get_str();
-
-    
 
     CBitcoinAddress addr(strAddress);
     if (!addr.IsValid())
