@@ -16,8 +16,8 @@
 
 static const int64 nClientStartupTime = GetTime();
 
-ClientModel::ClientModel(QObject *parent) :
-    QObject(parent),
+ClientModel::ClientModel(OptionsModel *optionsModel, QObject *parent) :
+    QObject(parent), optionsModel(optionsModel),
     cachedNumBlocks(0), cachedNumBlocksOfPeers(0),
     cachedReindexing(0), cachedImporting(0),
     numBlocksAtStartup(-1), pollTimer(0)
@@ -29,8 +29,6 @@ ClientModel::ClientModel(QObject *parent) :
     pollTimer->setInterval(MODEL_UPDATE_DELAY);
     pollTimer->start();
     connect(pollTimer, SIGNAL(timeout()), this, SLOT(updateTimer()));
-
-
 
     subscribeToCoreSignals();
 }
@@ -89,7 +87,6 @@ int ClientModel::getMiningScanTime() const
 void ClientModel::setMiningScanTime(int scantime)
 {
     miningScanTime = scantime;
-//    WriteSetting("miningScanTime", miningScanTime);
 }
 
 QString ClientModel::getMiningServer() const
@@ -100,7 +97,6 @@ QString ClientModel::getMiningServer() const
 void ClientModel::setMiningServer(QString server)
 {
     miningServer = server;
-//    WriteSetting("miningServer", miningServer.toStdString());
 }
 
 QString ClientModel::getMiningPort() const
@@ -111,7 +107,6 @@ QString ClientModel::getMiningPort() const
 void ClientModel::setMiningPort(QString port)
 {
     miningPort = port;
-//    WriteSetting("miningPort", miningPort.toStdString());
 }
 
 QString ClientModel::getMiningUsername() const
@@ -122,7 +117,6 @@ QString ClientModel::getMiningUsername() const
 void ClientModel::setMiningUsername(QString username)
 {
     miningUsername = username;
-//    WriteSetting("miningUsername", miningUsername.toStdString());
 }
 
 QString ClientModel::getMiningPassword() const
@@ -133,7 +127,6 @@ QString ClientModel::getMiningPassword() const
 void ClientModel::setMiningPassword(QString password)
 {
     miningPassword = password;
-//    WriteSetting("miningPassword", miningPassword.toStdString());
 }
 
 int ClientModel::getHashrate() const
@@ -254,9 +247,6 @@ void ClientModel::setMining(MiningType type, bool mining, int threads, int hashr
     }
     miningType = type;
     miningStarted = mining;
-//    WriteSetting("miningStarted", mining);
-//    WriteSetting("fLimitProcessors", 1);
-//    WriteSetting("nLimitProcessors", threads);
     emit miningChanged(mining, hashrate);
 }
 

@@ -26,7 +26,7 @@ class ClientModel : public QObject
     Q_OBJECT
 
 public:
-    explicit ClientModel(QObject *parent = 0);
+    explicit ClientModel(OptionsModel *optionsModel, QObject *parent = 0);
     ~ClientModel();
 
     enum MiningType

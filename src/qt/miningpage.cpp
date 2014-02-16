@@ -35,8 +35,9 @@ MiningPage::MiningPage(QWidget *parent) :
     connect(minerProcess, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(minerFinished()));
     connect(minerProcess, SIGNAL(readyRead()), this, SLOT(readProcessOutput()));
 
-    
-    setModel(new ClientModel(this));
+    // error: no known function for call ClientModel (MiningPage* const)
+    // candidates are ClientModel::ClientModel(OptionsModel*, QObject*)
+    setModel(new ClientModel(0, this));
 }
 
 MiningPage::~MiningPage()
@@ -107,7 +108,7 @@ void MiningPage::startPoolMining()
 {
     QStringList args;
     QString url = ui->serverLine->text();
-    if (!url.contains("http://") || !url.contains("tcp://"))
+    if (!url.contains("statum+tcp://"))
         url.prepend("stratum+tcp://");
     QString urlLine = QString("%1:%2").arg(url, ui->portLine->text());
     QString userpassLine = QString("%1:%2").arg(ui->usernameLine->text(), ui->passwordLine->text());
@@ -118,8 +119,6 @@ void MiningPage::startPoolMining()
     args << "--threads" << ui->threadsBox->text().toAscii();
     args << "--retries" << "-1"; // Retry forever.
     args << "-P"; // This is needed for this to work correctly on Windows. Extra protocol dump helps flush the buffer quicker.
-
-    
 
     threadSpeed.clear();
 
