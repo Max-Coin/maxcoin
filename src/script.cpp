@@ -58,7 +58,7 @@ bool CastToBool(const valtype& vch)
 
 //
 // Script is a stack machine (like Forth) that evaluates a predicate
-// returning a bool indicating valid or not.  There are no loops.
+// returning a bool indicating valid or not.  There are no while(true)s.
 //
 #define stacktop(i)  (stack.at(stack.size()+(i)))
 #define altstacktop(i)  (altstack.at(altstack.size()+(i)))
@@ -1170,7 +1170,7 @@ bool Solver(const CScript& scriptPubKey, txnouttype& typeRet, vector<vector<unsi
         // Compare
         CScript::const_iterator pc1 = script1.begin();
         CScript::const_iterator pc2 = script2.begin();
-        loop
+        while(true)
         {
             if (pc1 == script1.end() && pc2 == script2.end())
             {

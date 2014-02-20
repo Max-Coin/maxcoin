@@ -17,11 +17,14 @@
 #include "splashscreen.h"
 
 #include <QMessageBox>
-#include <QTextCodec>
 #include <QLocale>
 #include <QTimer>
 #include <QTranslator>
 #include <QLibraryInfo>
+
+#if QT_VERSION < 0x050000
+#include <QTextCodec>
+#endif
 
 #ifdef Q_OS_MAC
 #include "macdockiconhandler.h"
@@ -117,10 +120,12 @@ int main(int argc, char *argv[])
 {
     // Command-line options take precedence:
     ParseParameters(argc, argv);
-
+	
+#if QT_VERSION < 0x050000
     // Internal string conversion is all UTF-8
     QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
     QTextCodec::setCodecForCStrings(QTextCodec::codecForTr());
+#endif
 
     Q_INIT_RESOURCE(bitcoin);
     QApplication app(argc, argv);
