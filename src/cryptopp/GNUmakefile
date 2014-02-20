@@ -108,7 +108,7 @@ CXXFLAGS += -Wno-tautological-compare
 endif
 
 ifneq ($(IS_SUN_CC),0)	# override flags for CC Sun C++ compiler
-CXXFLAGS = -DNDEBUG -O -g0 -native -template=no%extdef $(M32OR64)
+CXXFLAGS = -DNDEBUG -O -g0 -template=no%extdef $(M32OR64)
 LDFLAGS =
 AR = $(CXX)
 ARFLAGS = -xar -o
