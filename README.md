@@ -21,6 +21,9 @@ Notable differences from Bitcoin
 
 Modifications to the RPC API
 + verifymessage <maxcoinaddress> <publickey> <signature> <message>
++ makekeypair [prefix]
+
+Additional technical details can be found in the [Wiki](https://github.com/Max-Coin/maxcoin/wiki/_pages).
 
 Forked from Bitcoin reference wallet 0.8.5 and Blakecoin
 
