@@ -34,6 +34,7 @@ Building miniupnpc
 ----------------
 
 If your OS doesn't support libminiupnpc, you can build this manually by performing the following steps:
+
 Don't use miniupnpc-1.6 as its broken an qmake compilation will fail to build Maxcoin-QT.
 
 $ wget 'http://miniupnp.free.fr/files/download.php?file=miniupnpc-1.5.tar.gz' -O miniupnpc-1.5.tar.gz
