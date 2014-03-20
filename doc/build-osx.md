@@ -1,4 +1,4 @@
-Mac OS X bitcoind build instructions
+Mac OS X maxcoind build instructions
 ====================================
 
 Authors
@@ -10,7 +10,7 @@ License
 -------
 
 Copyright (c) 2009-2014 Bitcoin Developers
-Copyright (c) 2013-2014 Bitcoin Developers
+Copyright (c)      2014 MaxCoin Developers
 
 Distributed under the MIT/X11 software license, see the accompanying
 file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -97,7 +97,7 @@ Installing the dependencies using MacPorts is very straightforward.
 Creating a release build
 ------------------------
 
-A bitcoind binary is not included in the Maxcoin-Qt.app bundle. You can ignore
+A maxcoind binary is not included in the Maxcoin-Qt.app bundle. You can ignore
 this section if you are building `maxcoind` for your own use.
 
 If you are building `maxcoind` for others, your build machine should be set up
@@ -131,26 +131,25 @@ As of December 2012, the `boost` port does not obey `macosx_deployment_target`.
 Download `http://gavinandresen-bitcoin.s3.amazonaws.com/boost_macports_fix.zip`
 for a fix. Some ports also seem to obey either `build_arch` or
 `macosx_deployment_target`, but not both at the same time. For example, building
-on an OS X 10.6 64-bit machine fails. Official release builds of Bitcoin-Qt are
-compiled on an OS X 10.6 32-bit machine to workaround that problem.
+on an OS X 10.6 64-bit machine fails.
 
 Running
 -------
 
-It's now available at `./bitcoind`, provided that you are still in the `src`
+It's now available at `./maxcoind`, provided that you are still in the `src`
 directory. We have to first create the RPC configuration file, though.
 
-Run `./bitcoind` to get the filename where it should be put, or just try these
+Run `./maxcoind` to get the filename where it should be put, or just try these
 commands:
 
-    echo -e "rpcuser=bitcoinrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/Bitcoin/bitcoin.conf"
-    chmod 600 "/Users/${USER}/Library/Application Support/Bitcoin/bitcoin.conf"
+    echo -e "rpcuser=maxcoinrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/maxcoin/maxcoin.conf"
+    chmod 600 "/Users/${USER}/Library/Application Support/maxcoin/maxcoin.conf"
 
 When next you run it, it will start downloading the blockchain, but it won't
 output anything while it's doing this. This process may take several hours.
 
 Other commands:
 
-    ./bitcoind --help  # for a list of command-line options.
-    ./bitcoind -daemon # to start the bitcoin daemon.
-    ./bitcoind help    # When the daemon is running, to get a list of RPC commands
+    ./maxcoind --help  # for a list of command-line options.
+    ./maxcoind -daemon # to start the MaxCoin daemon.
+    ./maxcoind help    # when the daemon is running, to get a list of RPC commands
