@@ -1083,6 +1083,7 @@ uint256 static GetOrphanRoot(const CBlockHeader* pblock)
 
 static const int64 nGenesisBlockRewardCoin = 5 * COIN;
 static const int64 nBlockRewardStartCoin = 96 * COIN;
+static const int64 nBlockRewardForkCoin = 48 * COIN;
 static const int64 nMinSubsidy = 1 * COIN;
 
 static const int64 nTargetTimespan = 3 * 60; // retarget every 3 minutes
@@ -1098,6 +1099,11 @@ int64 static GetBlockValue(int nHeight, int64 nFees, unsigned int nBits)
     }
 
     int64 nSubsidy = nBlockRewardStartCoin;
+    
+    if (nHeight > 140000)
+    {
+        nSubsidy = nBlockRewardForkCoin;
+    }
 
     // Subsidy is cut in half every 1051200 blocks, which will occur approximately every year
     nSubsidy >>= (nHeight / 1051200);
@@ -1106,7 +1112,7 @@ int64 static GetBlockValue(int nHeight, int64 nFees, unsigned int nBits)
     // and the last coin hasn't been mined
     if (nSubsidy < nMinSubsidy)
         nSubsidy = nMinSubsidy;
-    if (nHeight >= 57104800)
+    if (nHeight >= 6307200)
         nSubsidy = 0;
 
     return nSubsidy + nFees;
