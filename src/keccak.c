@@ -1654,8 +1654,9 @@ keccak_core(void *kcv, const void *data, size_t len, size_t lim)
  
 #define DEFCLOSE(d, lim) \
         static void keccak_close ## d( \
-                sph_keccak_context *kc, unsigned ub, unsigned n, void *dst) \
+                void *kcv, unsigned ub, unsigned n, void *dst) \
         { \
+                sph_keccak_context* kc = (sph_keccak_context*)kcv; \
                 unsigned eb; \
                 union { \
                         unsigned char tmp[lim + 1]; \
