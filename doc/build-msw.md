@@ -81,10 +81,10 @@ MSYS shell:
 	mkdir miniupnpc
 	cp *.h miniupnpc/
 
-Bitcoin
+MaxCoin
 -------
 DOS prompt:
 
-	cd \bitcoin\src
+	cd \maxcoin\src
 	mingw32-make -f makefile.mingw
-	strip bitcoind.exe
+	strip maxcoind.exe
