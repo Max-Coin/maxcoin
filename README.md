@@ -9,7 +9,7 @@ Technical Information
 + 48 coins rewarded per block, halving every ~12 months
 + minimum reward of 1 coin per block
 + 30 second block times
-+ difficulty retargeting using Kimoto Gravity Well
++ difficulty retargeting using a time-warp resistant implementation of KGW
 
 Notable differences from Bitcoin
 -----------------------------
