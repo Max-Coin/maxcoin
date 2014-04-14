@@ -8,7 +8,7 @@ IDI_ICON2 ICON DISCARDABLE "icons/MaxCoin_32_testnet.ico"
 #define VER_PRODUCTVERSION_STR STRINGIZE(CLIENT_VERSION_MAJOR) "." STRINGIZE(CLIENT_VERSION_MINOR) "." STRINGIZE(CLIENT_VERSION_REVISION) "." STRINGIZE(CLIENT_VERSION_BUILD)
 #define VER_FILEVERSION        VER_PRODUCTVERSION
 #define VER_FILEVERSION_STR    VER_PRODUCTVERSION_STR
-#define COPYRIGHT_STR          "2009-" STRINGIZE(COPYRIGHT_YEAR) " The Bitcoin developers, 2014 The MaxCoin developers"
+#define COPYRIGHT_STR          STRINGIZE(COPYRIGHT_YEAR) " The MaxCoin developers"
 
 VS_VERSION_INFO VERSIONINFO
 FILEVERSION     VER_FILEVERSION
@@ -21,7 +21,7 @@ BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
             VALUE "CompanyName",        "MaxCoin"
-            VALUE "FileDescription",    "MaxCoin-Qt (OSS GUI client for Bitcoin)"
+            VALUE "FileDescription",    "MaxCoin-Qt"
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "maxcoin-qt"
             VALUE "LegalCopyright",     COPYRIGHT_STR
