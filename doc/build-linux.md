@@ -1,9 +1,13 @@
 Building on Linux
 ===============
 
-To install the required dependencies, run the following command:
+To install the required dependencies, run the following command from Ubuntu:
 
 $ sudo apt-get install git-core build-essential libssl-dev libboost-all-dev libdb5.1-dev libdb5.1++-dev libgtk2.0-dev libminiupnpc-dev qt4-qmake mingw32 synaptic qt-sdk qt4-dev-tools libqt4-dev libqt4-core libqt4-gui libdb++-dev miniupnpc
+
+or the following command from Debian:
+
+$ sudo apt-get install git-core build-essential libssl-dev libboost-all-dev libdb-dev libdb4.8++-dev libgtk2.0-dev qt4-qmake mingw32 synaptic qt-sdk qt4-dev-tools libqt4-dev libqt4-core libqt4-gui libdb4.8++-dev
 
 Then grab the latest version of the MaxCoin source code from Github
 
