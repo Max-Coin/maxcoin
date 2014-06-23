@@ -1072,8 +1072,8 @@ Dirección: %4
     <name>PaymentServer</name>
     <message>
         <location filename="../paymentserver.cpp" line="+107"/>
-        <source>Cannot start bitcoin: click-to-pay handler</source>
-        <translation>No se pudo iniciar bitcoin: manejador de pago-al-clic</translation>
+        <source>Cannot start maxcoin: click-to-pay handler</source>
+        <translation>No se pudo iniciar maxcoin: manejador de pago-al-clic</translation>
     </message>
 </context>
 <context>

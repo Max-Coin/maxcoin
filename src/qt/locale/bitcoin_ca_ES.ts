@@ -1060,8 +1060,8 @@ Address: %4
     <name>PaymentServer</name>
     <message>
         <location filename="../paymentserver.cpp" line="+107"/>
-        <source>Cannot start bitcoin: click-to-pay handler</source>
-        <translation>No es pot iniciar bitcoin: manejador clicla-per-pagar</translation>
+        <source>Cannot start maxcoin: click-to-pay handler</source>
+        <translation>No es pot iniciar maxcoin: manejador clicla-per-pagar</translation>
     </message>
 </context>
 <context>

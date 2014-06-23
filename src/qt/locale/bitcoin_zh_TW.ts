@@ -1069,7 +1069,7 @@ Address: %4
     <name>PaymentServer</name>
     <message>
         <location filename="../paymentserver.cpp" line="+107"/>
-        <source>Cannot start bitcoin: click-to-pay handler</source>
+        <source>Cannot start maxcoin: click-to-pay handler</source>
         <translation>無法啟動 bitcoin 隨按隨付處理器</translation>
     </message>
 </context>
