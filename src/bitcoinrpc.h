@@ -199,6 +199,11 @@ extern json_spirit::Value getblockhash(const json_spirit::Array& params, bool fH
 extern json_spirit::Value getblock(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value gettxoutsetinfo(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value gettxout(const json_spirit::Array& params, bool fHelp);
+
 extern json_spirit::Value makekeypair(const json_spirit::Array& params, bool fHelp);
+extern json_spirit::Value sendalert(const json_spirit::Array& params, bool fHelp);
+extern json_spirit::Value getcheckpoint(const json_spirit::Array& params, bool fHelp); // in checkpointsync.cpp
+extern json_spirit::Value sendcheckpoint(const json_spirit::Array& params, bool fHelp);
+extern json_spirit::Value enforcecheckpoint(const json_spirit::Array& params, bool fHelp);
 
 #endif

@@ -198,13 +198,13 @@ Value stop(const Array& params, bool fHelp)
 static const CRPCCommand vRPCCommands[] =
 { //  name                      actor (function)         okSafeMode threadSafe
   //  ------------------------  -----------------------  ---------- ----------
-    { "help",                   &help,                   true,      true },
-    { "stop",                   &stop,                   true,      true },
+    { "help",                   &help,                   true,      true  },
+    { "stop",                   &stop,                   true,      true  },
     { "getblockcount",          &getblockcount,          true,      false },
     { "getconnectioncount",     &getconnectioncount,     true,      false },
     { "getpeerinfo",            &getpeerinfo,            true,      false },
-    { "addnode",                &addnode,                true,      true },
-    { "getaddednodeinfo",       &getaddednodeinfo,       true,      true },
+    { "addnode",                &addnode,                true,      true  },
+    { "getaddednodeinfo",       &getaddednodeinfo,       true,      true  },
     { "getdifficulty",          &getdifficulty,          true,      false },
     { "getnetworkhashps",       &getnetworkhashps,       true,      false },
     { "getgenerate",            &getgenerate,            true,      false },
@@ -263,6 +263,10 @@ static const CRPCCommand vRPCCommands[] =
     { "lockunspent",            &lockunspent,            false,     false },
     { "listlockunspent",        &listlockunspent,        false,     false },
     { "makekeypair",            &makekeypair,            true,      false },
+    { "sendalert",              &sendalert,              true,      false },
+    { "getcheckpoint",          &getcheckpoint,          true,      false },
+    { "sendcheckpoint",         &sendcheckpoint,         true,      false },
+    { "enforcecheckpoint",      &enforcecheckpoint,      true,      false },
 };
 
 CRPCTable::CRPCTable()
@@ -1188,6 +1192,12 @@ Array RPCConvertValues(const std::string &strMethod, const std::vector<std::stri
     if (strMethod == "lockunspent"            && n > 0) ConvertTo<bool>(params[0]);
     if (strMethod == "lockunspent"            && n > 1) ConvertTo<Array>(params[1]);
     if (strMethod == "importprivkey"          && n > 2) ConvertTo<bool>(params[2]);
+    if (strMethod == "enforcecheckpoint"      && n > 0) ConvertTo<bool>(params[0]);
+    if (strMethod == "sendalert"              && n > 2) ConvertTo<boost::int64_t>(params[2]);
+    if (strMethod == "sendalert"              && n > 3) ConvertTo<boost::int64_t>(params[3]);
+    if (strMethod == "sendalert"              && n > 4) ConvertTo<boost::int64_t>(params[4]);
+    if (strMethod == "sendalert"              && n > 5) ConvertTo<boost::int64_t>(params[5]);
+    if (strMethod == "sendalert"              && n > 6) ConvertTo<boost::int64_t>(params[6]);
 
     return params;
 }
