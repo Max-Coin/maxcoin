@@ -24,6 +24,11 @@ class CNode;
 
 struct CBlockIndexWorkComparator;
 
+/** Block heights for the hard forks */
+static const unsigned int BLOCK_HEIGHT_FORK1 = 140000;
+static const unsigned int BLOCK_HEIGHT_FORK2 = 177500;
+static const unsigned int BLOCK_HEIGHT_FORK3 = 600000;
+
 /** The maximum allowed size for a serialized block, in bytes (network rule) */
 static const unsigned int MAX_BLOCK_SIZE = 1000000;
 /** Obsolete: maximum size for mined blocks */

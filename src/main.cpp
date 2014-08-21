@@ -1083,12 +1083,16 @@ uint256 static GetOrphanRoot(const CBlockHeader* pblock)
 
 static const int64 nGenesisBlockRewardCoin = 5 * COIN;
 static const int64 nBlockRewardStartCoin = 96 * COIN;
-static const int64 nBlockRewardForkCoin = 48 * COIN;
-static const int64 nMinSubsidy = 1 * COIN;
+static const int64 nBlockRewardFork1Coin = 48 * COIN;
+static const int64 nBlockRewardFork3Coin = 16 * COIN;
 
 static const int64 nTargetTimespan = 3 * 60; // retarget every 3 minutes
 static const int64 nTargetSpacing = 30; // 30 seconds
 static const int64 nInterval = nTargetTimespan / nTargetSpacing;
+
+static const int64 BLOCKS_PER_DAY = 60 * 24; // 60s blocks
+static const int64 BLOCKS_PER_YEAR = BLOCKS_PER_DAY * 365;
+static const int64 BLOCKS_PER_HALVING_PERIOD = BLOCKS_PER_YEAR * 4;
 
 int64 static GetBlockValue(int nHeight, int64 nFees, unsigned int nBits)
 {
@@ -1100,20 +1104,18 @@ int64 static GetBlockValue(int nHeight, int64 nFees, unsigned int nBits)
 
     int64 nSubsidy = nBlockRewardStartCoin;
     
-    if (nHeight > 140000)
+    if (nHeight > BLOCK_HEIGHT_FORK1)
     {
-        nSubsidy = nBlockRewardForkCoin;
+        nSubsidy = nBlockRewardFork1Coin;
     }
 
-    // Subsidy is cut in half every 1051200 blocks, which will occur approximately every year
-    nSubsidy >>= (nHeight / 1051200);
+    if (nHeight > BLOCK_HEIGHT_FORK3)
+    {
+        nSubsidy = nBlockRewardFork3Coin;
+    }
 
-    // ensure the minimum block reward is greater than the minimum
-    // and the last coin hasn't been mined
-    if (nSubsidy < nMinSubsidy)
-        nSubsidy = nMinSubsidy;
-    if (nHeight >= 6307200)
-        nSubsidy = 0;
+    // Subsidy is cut in half every 4 years
+    nSubsidy >>= (nHeight / BLOCKS_PER_HALVING_PERIOD);
 
     return nSubsidy + nFees;
 }
@@ -1241,7 +1243,7 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBloc
         PastDifficultyAveragePrev = PastDifficultyAverage;
         
         if (LatestBlockTime < BlockReading->GetBlockTime()) {
-            if (BlockReading->nHeight > 177500) {
+            if (BlockReading->nHeight > BLOCK_HEIGHT_FORK2) {
                 LatestBlockTime = BlockReading->GetBlockTime();
             }
         }
@@ -1250,7 +1252,7 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBloc
         PastRateTargetSeconds = TargetBlocksSpacingSeconds * PastBlocksMass;
         PastRateAdjustmentRatio = double(1);
 
-        if (BlockReading->nHeight > 177500) {
+        if (BlockReading->nHeight > BLOCK_HEIGHT_FORK2) {
             if (PastRateActualSeconds < 1) {
                 PastRateActualSeconds = 1;
             }
@@ -1296,7 +1298,7 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBloc
 
 unsigned int static GetNextWorkRequired_V2(const CBlockIndex* pindexLast, const CBlockHeader *pblock)
 {
-        static const int64 BlocksTargetSpacing = 0.5 * 60; // 30 seconds
+        static const int64 BlocksTargetSpacing = (pindexLast->nHeight+1 > BLOCK_HEIGHT_FORK3) ? 60 : 30;
         static const unsigned int TimeDaySeconds = 60 * 60 * 24;
         int64 PastSecondsMin = TimeDaySeconds * 0.01;
         int64 PastSecondsMax = TimeDaySeconds * 0.14;
