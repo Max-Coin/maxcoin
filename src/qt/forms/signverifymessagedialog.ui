@@ -240,7 +240,7 @@
        <item>
         <widget class="QLabel" name="infoLabel_VM">
          <property name="text">
-          <string>Enter the signing address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack.</string>
+          <string>Enter the message (ensure you copy line breaks, spaces, tabs, etc. exactly), signing public key and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack.</string>
          </property>
          <property name="textFormat">
           <enum>Qt::PlainText</enum>
@@ -258,36 +258,6 @@
          <property name="spacing">
           <number>0</number>
          </property>
-         <item>
-          <widget class="QValidatedLineEdit" name="addressIn_VM">
-           <property name="toolTip">
-            <string>The address the message was signed with (e.g. mNS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</string>
-           </property>
-           <property name="maxLength">
-            <number>34</number>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="addressBookButton_VM">
-           <property name="toolTip">
-            <string>Choose an address from the address book</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../bitcoin.qrc">
-             <normaloff>:/icons/address-book</normaloff>:/icons/address-book</iconset>
-           </property>
-           <property name="shortcut">
-            <string>Alt+A</string>
-           </property>
-           <property name="autoDefault">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
         </layout>
        </item>
        <item>

@@ -1542,7 +1542,7 @@ Address: %4
     </message>
     <message>
         <location line="+6"/>
-        <source>Enter the signing address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack.</source>
+        <source>Enter the message (ensure you copy line breaks, spaces, tabs, etc. exactly), signing public key and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack.</source>
         <translation>Πληκτρολογήστε την υπογραφή διεύθυνσης, μήνυμα (βεβαιωθείτε ότι έχετε αντιγράψει τις αλλαγές γραμμής, κενά, tabs, κ.λπ. ακριβώς) και την υπογραφή παρακάτω, για να ελέγξει το μήνυμα. Να είστε προσεκτικοί για να μην διαβάσετε περισσότερα στην υπογραφή ό, τι είναι στην υπογραφή ίδιο το μήνυμα , για να μην εξαπατηθούν από έναν άνθρωπο -in - the-middle επίθεση.</translation>
     </message>
     <message>

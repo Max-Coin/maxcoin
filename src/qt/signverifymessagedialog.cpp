@@ -28,18 +28,16 @@ SignVerifyMessageDialog::SignVerifyMessageDialog(QWidget *parent) :
     ui->pubkeyOut_VM->setPlaceholderText(tr("Click \"Sign Message\" to view public key"));
     ui->signatureOut_SM->setPlaceholderText(tr("Click \"Sign Message\" to generate signature"));
 
-    ui->addressIn_VM->setPlaceholderText(tr("Enter a MaxCoin address (e.g. mhN8btKtp3HrXgZJwyBakUzALLZ34nA4J)"));
     ui->pubkeyIn_VM->setPlaceholderText(tr("Enter the public key used for signing"));
     ui->signatureIn_VM->setPlaceholderText(tr("Enter MaxCoin signature"));
 #endif
 
     GUIUtil::setupAddressWidget(ui->addressIn_SM, this);
-    GUIUtil::setupAddressWidget(ui->addressIn_VM, this);
 
     ui->addressIn_SM->installEventFilter(this);
     ui->messageIn_SM->installEventFilter(this);
     ui->signatureOut_SM->installEventFilter(this);
-    ui->addressIn_VM->installEventFilter(this);
+    // ui->addressIn_VM->installEventFilter(this);
     ui->messageIn_VM->installEventFilter(this);
     ui->signatureIn_VM->installEventFilter(this);
 
@@ -61,12 +59,6 @@ void SignVerifyMessageDialog::setAddress_SM(const QString &address)
 {
     ui->addressIn_SM->setText(address);
     ui->messageIn_SM->setFocus();
-}
-
-void SignVerifyMessageDialog::setAddress_VM(const QString &address)
-{
-    ui->addressIn_VM->setText(address);
-    ui->messageIn_VM->setFocus();
 }
 
 void SignVerifyMessageDialog::showTab_SM(bool fShow)
@@ -178,19 +170,6 @@ void SignVerifyMessageDialog::on_clearButton_SM_clicked()
     ui->addressIn_SM->setFocus();
 }
 
-void SignVerifyMessageDialog::on_addressBookButton_VM_clicked()
-{
-    if (model && model->getAddressTableModel())
-    {
-        AddressBookPage dlg(AddressBookPage::ForSending, AddressBookPage::SendingTab, this);
-        dlg.setModel(model->getAddressTableModel());
-        if (dlg.exec())
-        {
-            setAddress_VM(dlg.getReturnValue());
-        }
-    }
-}
-
 void SignVerifyMessageDialog::on_verifyMessageButton_VM_clicked()
 {
     std::vector<unsigned char> vchSig = ParseHex(ui->signatureIn_VM->text().toStdString());
@@ -233,12 +212,9 @@ void SignVerifyMessageDialog::on_verifyMessageButton_VM_clicked()
 
 void SignVerifyMessageDialog::on_clearButton_VM_clicked()
 {
-    ui->addressIn_VM->clear();
     ui->signatureIn_VM->clear();
     ui->messageIn_VM->clear();
     ui->statusLabel_VM->clear();
-
-    ui->addressIn_VM->setFocus();
 }
 
 bool SignVerifyMessageDialog::eventFilter(QObject *object, QEvent *event)

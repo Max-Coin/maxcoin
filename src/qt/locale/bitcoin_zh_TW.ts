@@ -1539,7 +1539,7 @@ Address: %4
     </message>
     <message>
         <location line="+6"/>
-        <source>Enter the signing address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack.</source>
+        <source>Enter the message (ensure you copy line breaks, spaces, tabs, etc. exactly), signing public key and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack.</source>
         <translation>請在下面輸入簽署的位址, 訊息(請確認完整複製了所包含的換行, 空格, 跳位符號等等), 與簽章, 以驗證該訊息. 請小心, 除了訊息內容外, 不要對簽章本身過度解讀, 以避免被用&quot;中間人攻擊法&quot;詐騙.</translation>
     </message>
     <message>
