@@ -51,13 +51,20 @@ CPubKey CWallet::GenerateNewKey()
 
 bool CWallet::AddKey(const CKey& key)
 {
-    bool fCompressed;
-    if (!CCryptoKeyStore::AddKey(key))
+    bool fCompressed, fRet;
+    if (!CCryptoKeyStore::AddKey(key)) {
+        printf("CWallet::AddKey() : CCryptoKeyStore::AddKey() failed\n");
         return false;
+    }
     if (!fFileBacked)
         return true;
-    if (!IsCrypted())
-        return CWalletDB(strWalletFile).WriteKey(key.GetPubKey(), key.GetSecret(fCompressed));
+    if (!IsCrypted()) {
+        fRet = CWalletDB(strWalletFile).WriteKey(key.GetPubKey(), key.GetSecret(fCompressed));
+        if (!fRet) {
+            printf("CWallet::AddKey() : could CWalletDB.WriteKey() failed\n");
+        }
+        return fRet;
+    }
     return true;
 }
 

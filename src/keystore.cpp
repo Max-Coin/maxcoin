@@ -124,17 +124,23 @@ bool CCryptoKeyStore::AddKey(const CKey& key)
         if (!IsCrypted())
             return CBasicKeyStore::AddKey(key);
 
-        if (IsLocked())
+        if (IsLocked()) {
+            printf("CCryptoKeyStore::AddKey() : wallet is locked\n");
             return false;
+        }
 
         std::vector<unsigned char> vchCryptedSecret;
         CPubKey vchPubKey = key.GetPubKey();
         bool fCompressed;
-        if (!EncryptSecret(vMasterKey, key.GetSecret(fCompressed), vchPubKey.GetHash(), vchCryptedSecret))
+        if (!EncryptSecret(vMasterKey, key.GetSecret(fCompressed), vchPubKey.GetHash(), vchCryptedSecret)) {
+            printf("CCryptoKeyStore::AddKey() : EncryptSecret() failed\n");
             return false;
+        }
 
-        if (!AddCryptedKey(key.GetPubKey(), vchCryptedSecret))
+        if (!AddCryptedKey(key.GetPubKey(), vchCryptedSecret)) {
+            printf("CCryptoKeyStore::AddKey() : AddCryptedKey() failed\n");
             return false;
+        }
     }
     return true;
 }

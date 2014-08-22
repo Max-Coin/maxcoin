@@ -158,14 +158,15 @@ void SignVerifyMessageDialog::on_signMessageButton_SM_clicked()
     ui->statusLabel_SM->setStyleSheet("QLabel { color: green; }");
     ui->statusLabel_SM->setText(QString("<nobr>") + tr("Message signed.") + QString("</nobr>"));
 
-    ui->pubkeyOut_VM->setText(QString::fromStdString(EncodeBase64(&vchPubKey[0], vchPubKey.size())));
-    ui->signatureOut_SM->setText(QString::fromStdString(EncodeBase64(&vchSig[0], vchSig.size())));
+    ui->pubkeyOut_VM->setText(QString::fromStdString(HexStr(vchPubKey.begin(), vchPubKey.end())));
+    ui->signatureOut_SM->setText(QString::fromStdString(HexStr(vchSig.begin(), vchSig.end())));
 }
 
 void SignVerifyMessageDialog::on_copySignatureButton_SM_clicked()
 {
     QApplication::clipboard()->setText(ui->signatureOut_SM->text());
 }
+
 
 void SignVerifyMessageDialog::on_clearButton_SM_clicked()
 {
@@ -192,51 +193,15 @@ void SignVerifyMessageDialog::on_addressBookButton_VM_clicked()
 
 void SignVerifyMessageDialog::on_verifyMessageButton_VM_clicked()
 {
-    CBitcoinAddress addr(ui->addressIn_VM->text().toStdString());
-    if (!addr.IsValid())
-    {
-        ui->addressIn_VM->setValid(false);
-        ui->statusLabel_VM->setStyleSheet("QLabel { color: red; }");
-        ui->statusLabel_VM->setText(tr("The entered address is invalid.") + QString(" ") + tr("Please check the address and try again."));
-        return;
-    }
-    CKeyID keyID;
-    if (!addr.GetKeyID(keyID))
-    {
-        ui->addressIn_VM->setValid(false);
-        ui->statusLabel_VM->setStyleSheet("QLabel { color: red; }");
-        ui->statusLabel_VM->setText(tr("The entered address does not refer to a key.") + QString(" ") + tr("Please check the address and try again."));
-        return;
-    }
-
-    bool fInvalid = false;
-    std::vector<unsigned char> vchSig = DecodeBase64(ui->signatureIn_VM->text().toStdString().c_str(), &fInvalid);
-
-    if (fInvalid)
-    {
-        ui->signatureIn_VM->setValid(false);
-        ui->statusLabel_VM->setStyleSheet("QLabel { color: red; }");
-        ui->statusLabel_VM->setText(tr("The signature could not be decoded.") + QString(" ") + tr("Please check the signature and try again."));
-        return;
-    }
-
+    std::vector<unsigned char> vchSig = ParseHex(ui->signatureIn_VM->text().toStdString());
     CDataStream ss(SER_GETHASH, 0);
     ss << strMessageMagic;
     ss << ui->messageIn_VM->document()->toPlainText().toStdString();
 
-    // get the public key from UI
-    fInvalid = false;
-    std::vector<unsigned char> vchPubKey = DecodeBase64(ui->pubkeyIn_VM->text().toStdString().c_str(), &fInvalid);
+    // get the public key from Ui
+    std::vector<unsigned char> vchPubKey = ParseHex(ui->pubkeyIn_VM->text().toStdString());
 
-    if (fInvalid)
-    {
-        ui->pubkeyIn_VM->setValid(false);
-        ui->statusLabel_VM->setStyleSheet("QLabel { color: red; }");
-        ui->statusLabel_VM->setText(tr("The public key could not be decoded.") + QString(" ") + tr("Please check it and try again."));
-        return;
-    }
-
-    CPubKey pubkey(vchPubKey);
+    CPubKey pubkey(vchPubKey); // TODO - this doesn't work.
     if (!pubkey.IsValid())
     {
         ui->pubkeyIn_VM->setValid(false);
@@ -259,17 +224,6 @@ void SignVerifyMessageDialog::on_verifyMessageButton_VM_clicked()
         ui->signatureIn_VM->setValid(false);
         ui->statusLabel_VM->setStyleSheet("QLabel { color: red; }");
         ui->statusLabel_VM->setText(tr("The signature did not match the message digest.") + QString(" ") + tr("Please check the signature and try again."));
-        return;
-    }
-
-    // TODO
-    // add the public key
-    //key.SetPubKey();
-
-    if (!(CBitcoinAddress(key.GetPubKey().GetID()) == addr))
-    {
-        ui->statusLabel_VM->setStyleSheet("QLabel { color: red; }");
-        ui->statusLabel_VM->setText(QString("<nobr>") + tr("Message verification failed.") + QString("</nobr>"));
         return;
     }
 

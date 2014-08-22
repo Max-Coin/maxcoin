@@ -6,9 +6,8 @@ An alternative cryptocurrency disrupting the already rather disrupting crypto ma
 Technical Information
 
 + ~100,000,000 coins
-+ 48 coins rewarded per block, halving every ~12 months
-+ minimum reward of 1 coin per block
-+ 30 second block times
++ 16 coins rewarded per block, halving every 4 years
++ 60 second block times
 + difficulty retargeting using a time-warp resistant implementation of KGW
 
 Notable differences from Bitcoin
@@ -17,11 +16,11 @@ Notable differences from Bitcoin
 + replacement of ECDSA with Schnorr signing
 + use of secp256r1 curve over secp256k1
 + requirement for public key when verifying transactions
-+ modification to RPC interface s.t. public keys are Base64 encoded
 
 Modifications to the RPC API
-+ verifymessage <maxcoinaddress> <publickey> <signature> <message>
-+ makekeypair [prefix]
++ verifymessage <publickey> <signature> <message>
++ makekeypair [hex-encoded prefix]
++ dumppubkey <maxcoinaddress>
 
 Additional technical details can be found in the [Wiki](https://github.com/Max-Coin/maxcoin/wiki/_pages).
 

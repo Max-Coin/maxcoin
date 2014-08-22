@@ -232,16 +232,16 @@ Value makekeypair(const Array& params, bool fHelp)
         pubKey = key.GetPubKey();
         vchPubKey = pubKey.Raw();
         nCount++;
-    } while (nCount < 10000 && strPrefix != HexStr(vchPubKey.begin(), vchPubKey.end()).substr(0, strPrefix.size()));
+    } while (nCount < 10000 && strPrefix != HexStr(vchPubKey).substr(0, strPrefix.size()));
 
-    if (strPrefix != HexStr(vchPubKey.begin(), vchPubKey.end()).substr(0, strPrefix.size()))
+    if (strPrefix != HexStr(vchPubKey).substr(0, strPrefix.size()))
         return Value::null;
 
     bool isCompressed;
     CSecret secretKey = key.GetSecret(isCompressed);
 
     Object result;
-    result.push_back(Pair("PublicKey",  HexStr(vchPubKey.begin(), vchPubKey.end())));
+    result.push_back(Pair("PublicKey",  HexStr(vchPubKey)));
     result.push_back(Pair("PrivateKey", CBitcoinSecret(secretKey, isCompressed).ToString()));
     return result;
 }
