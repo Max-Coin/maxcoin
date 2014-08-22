@@ -105,7 +105,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QValidatedLineEdit" name="pubkeyOut_VM">
+        <widget class="QValidatedLineEdit" name="pubkeyOut_SM">
          <property name="toolTip">
           <string>The public key used to sign the message</string>
          </property>

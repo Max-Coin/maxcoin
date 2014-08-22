@@ -25,7 +25,7 @@ SignVerifyMessageDialog::SignVerifyMessageDialog(QWidget *parent) :
 #if (QT_VERSION >= 0x040700)
     /* Do not move this to the XML file, Qt before 4.7 will choke on it */
     ui->addressIn_SM->setPlaceholderText(tr("Enter a MaxCoin address (e.g. mhN8btKtp3HrXgZJwyBakUzALLZ34nA4J)"));
-    ui->pubkeyOut_VM->setPlaceholderText(tr("Click \"Sign Message\" to view public key"));
+    ui->pubkeyOut_SM->setPlaceholderText(tr("Click \"Sign Message\" to view public key"));
     ui->signatureOut_SM->setPlaceholderText(tr("Click \"Sign Message\" to generate signature"));
 
     ui->pubkeyIn_VM->setPlaceholderText(tr("Enter the public key used for signing"));
@@ -37,10 +37,11 @@ SignVerifyMessageDialog::SignVerifyMessageDialog(QWidget *parent) :
     ui->addressIn_SM->installEventFilter(this);
     ui->messageIn_SM->installEventFilter(this);
     ui->signatureOut_SM->installEventFilter(this);
-    // ui->addressIn_VM->installEventFilter(this);
     ui->messageIn_VM->installEventFilter(this);
     ui->signatureIn_VM->installEventFilter(this);
 
+    ui->pubkeyOut_SM->setFont(GUIUtil::bitcoinAddressFont());
+    ui->pubkeyIn_VM->setFont(GUIUtil::bitcoinAddressFont());
     ui->signatureOut_SM->setFont(GUIUtil::bitcoinAddressFont());
     ui->signatureIn_VM->setFont(GUIUtil::bitcoinAddressFont());
 }
@@ -150,7 +151,7 @@ void SignVerifyMessageDialog::on_signMessageButton_SM_clicked()
     ui->statusLabel_SM->setStyleSheet("QLabel { color: green; }");
     ui->statusLabel_SM->setText(QString("<nobr>") + tr("Message signed.") + QString("</nobr>"));
 
-    ui->pubkeyOut_VM->setText(QString::fromStdString(HexStr(vchPubKey)));
+    ui->pubkeyOut_SM->setText(QString::fromStdString(HexStr(vchPubKey)));
     ui->signatureOut_SM->setText(QString::fromStdString(HexStr(vchSig)));
 }
 
