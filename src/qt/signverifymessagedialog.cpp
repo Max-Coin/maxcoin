@@ -158,8 +158,8 @@ void SignVerifyMessageDialog::on_signMessageButton_SM_clicked()
     ui->statusLabel_SM->setStyleSheet("QLabel { color: green; }");
     ui->statusLabel_SM->setText(QString("<nobr>") + tr("Message signed.") + QString("</nobr>"));
 
-    ui->pubkeyOut_VM->setText(QString::fromStdString(HexStr(vchPubKey.begin(), vchPubKey.end())));
-    ui->signatureOut_SM->setText(QString::fromStdString(HexStr(vchSig.begin(), vchSig.end())));
+    ui->pubkeyOut_VM->setText(QString::fromStdString(HexStr(vchPubKey)));
+    ui->signatureOut_SM->setText(QString::fromStdString(HexStr(vchSig)));
 }
 
 void SignVerifyMessageDialog::on_copySignatureButton_SM_clicked()
@@ -200,8 +200,8 @@ void SignVerifyMessageDialog::on_verifyMessageButton_VM_clicked()
 
     // get the public key from Ui
     std::vector<unsigned char> vchPubKey = ParseHex(ui->pubkeyIn_VM->text().toStdString());
-
-    CPubKey pubkey(vchPubKey); // TODO - this doesn't work.
+    
+    CPubKey pubkey(vchPubKey);
     if (!pubkey.IsValid())
     {
         ui->pubkeyIn_VM->setValid(false);

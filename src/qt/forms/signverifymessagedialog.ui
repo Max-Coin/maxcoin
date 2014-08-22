@@ -110,7 +110,7 @@
           <string>The public key used to sign the message</string>
          </property>
          <property name="maxLength">
-          <number>128</number>
+          <number>130</number>
          </property>
         </widget>
        </item>
@@ -299,7 +299,7 @@
           <string>The public key used to sign the message</string>
          </property>
          <property name="maxLength">
-          <number>128</number>
+          <number>130</number>
          </property>
         </widget>
        </item>
