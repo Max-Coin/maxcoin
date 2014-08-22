@@ -77,8 +77,8 @@ using namespace std;
 
 
 // ppcoin: sync-checkpoint master key
-const std::string CSyncCheckpoint::strMainPubKey = "04ddba182952d8a41115cfea636a6da3d0015ee4d18cbfe1c80458a37550d865f937dbf02e94b9cd2465bc1cb33bc5929ab05162c9604341daea3ee7bf5adad058";
-const std::string CSyncCheckpoint::strTestPubKey = "";
+const std::string CSyncCheckpoint::strMainPubKey = "02ae1dd4c24532b7fecb85dad92f0d31b105905714fbb4fdc1c924f8d9744b1155";
+const std::string CSyncCheckpoint::strTestPubKey = "0218550271fd8bb1158cb704aba1538c2205a74dec5e1578de47683e9f2c611fef";
 std::string CSyncCheckpoint::strMasterPrivKey = "";
 
 
@@ -91,26 +91,38 @@ uint256 hashInvalidCheckpoint = 0;
 CCriticalSection cs_hashSyncCheckpoint;
 std::string strCheckpointWarning;
 
+uint256 GetHashSyncCheckPoint()
+{
+    if (hashSyncCheckpoint == 0)
+    {
+        return Checkpoints::GetLastAvailableCheckpoint();
+    }
+
+    return hashSyncCheckpoint;
+}
+
 // ppcoin: get last synchronized checkpoint
 CBlockIndex* GetLastSyncCheckpoint()
 {
     LOCK(cs_hashSyncCheckpoint);
-    if (!mapBlockIndex.count(hashSyncCheckpoint))
-        error("GetSyncCheckpoint: block index missing for current sync-checkpoint %s", hashSyncCheckpoint.ToString().c_str());
+    uint256 hashSyncCheckP = GetHashSyncCheckPoint();
+    if (!mapBlockIndex.count(hashSyncCheckP))
+        error("GetSyncCheckpoint: block index missing for current sync-checkpoint %s", hashSyncCheckP.ToString().c_str());
     else
-        return mapBlockIndex[hashSyncCheckpoint];
+        return mapBlockIndex[hashSyncCheckP];
     return NULL;
 }
 
 // ppcoin: only descendant of current sync-checkpoint is allowed
 bool ValidateSyncCheckpoint(uint256 hashCheckpoint)
 {
-    if (!mapBlockIndex.count(hashSyncCheckpoint))
-        return error("ValidateSyncCheckpoint: block index missing for current sync-checkpoint %s", hashSyncCheckpoint.ToString().c_str());
+    uint256 hashSyncCheckP = GetHashSyncCheckPoint();
+    if (!mapBlockIndex.count(hashSyncCheckP))
+        return error("ValidateSyncCheckpoint: block index missing for current sync-checkpoint %s", hashSyncCheckP.ToString().c_str());
     if (!mapBlockIndex.count(hashCheckpoint))
         return error("ValidateSyncCheckpoint: block index missing for received sync-checkpoint %s", hashCheckpoint.ToString().c_str());
 
-    CBlockIndex* pindexSyncCheckpoint = mapBlockIndex[hashSyncCheckpoint];
+    CBlockIndex* pindexSyncCheckpoint = mapBlockIndex[hashSyncCheckP];
     CBlockIndex* pindexCheckpointRecv = mapBlockIndex[hashCheckpoint];
 
     if (pindexCheckpointRecv->nHeight <= pindexSyncCheckpoint->nHeight)
@@ -137,7 +149,7 @@ bool ValidateSyncCheckpoint(uint256 hashCheckpoint)
     while (pindex->nHeight > pindexSyncCheckpoint->nHeight)
         if (!(pindex = pindex->pprev))
             return error("ValidateSyncCheckpoint: pprev2 null - block index structure failure");
-    if (pindex->GetBlockHash() != hashSyncCheckpoint)
+    if (pindex->GetBlockHash() != hashSyncCheckP)
     {
         hashInvalidCheckpoint = hashCheckpoint;
         return error("ValidateSyncCheckpoint: new sync-checkpoint %s is not a descendant of current sync-checkpoint %s", hashCheckpoint.ToString().c_str(), hashSyncCheckpoint.ToString().c_str());
@@ -191,7 +203,7 @@ bool AcceptPendingSyncCheckpoint()
         hashPendingCheckpoint = 0;
         checkpointMessage = checkpointMessagePending;
         checkpointMessagePending.SetNull();
-        printf("AcceptPendingSyncCheckpoint : sync-checkpoint at %s\n", hashSyncCheckpoint.ToString().c_str());
+        printf("AcceptPendingSyncCheckpoint : sync-checkpoint at %s\n", GetHashSyncCheckPoint().ToString().c_str());
         // relay the checkpoint
         if (!checkpointMessage.IsNull())
         {
@@ -219,8 +231,9 @@ bool CheckSyncCheckpoint(const uint256& hashBlock, const CBlockIndex* pindexPrev
     int nHeight = pindexPrev->nHeight + 1;
     LOCK(cs_hashSyncCheckpoint);
     // sync-checkpoint should always be accepted block
-    assert(mapBlockIndex.count(hashSyncCheckpoint));
-    const CBlockIndex* pindexSync = mapBlockIndex[hashSyncCheckpoint];
+    uint256 hashSyncCheckP = GetHashSyncCheckPoint();
+    assert(mapBlockIndex.count(hashSyncCheckP));
+    const CBlockIndex* pindexSync = mapBlockIndex[hashSyncCheckP];
 
     if (nHeight > pindexSync->nHeight)
     {
@@ -229,10 +242,10 @@ bool CheckSyncCheckpoint(const uint256& hashBlock, const CBlockIndex* pindexPrev
         while (pindex->nHeight > pindexSync->nHeight)
             if (!(pindex = pindex->pprev))
                 return error("CheckSyncCheckpoint: pprev null - block index structure failure");
-        if (pindex->nHeight < pindexSync->nHeight || pindex->GetBlockHash() != hashSyncCheckpoint)
+        if (pindex->nHeight < pindexSync->nHeight || pindex->GetBlockHash() != hashSyncCheckP)
             return false; // only descendant of sync-checkpoint can pass check
     }
-    if (nHeight == pindexSync->nHeight && hashBlock != hashSyncCheckpoint)
+    if (nHeight == pindexSync->nHeight && hashBlock != hashSyncCheckP)
         return false; // same height with sync-checkpoint
     if (nHeight < pindexSync->nHeight && !mapBlockIndex.count(hashBlock))
         return false; // lower height than sync-checkpoint
@@ -276,7 +289,7 @@ bool ResetSyncCheckpoint()
 
     if (!WriteSyncCheckpoint(hash))
         return error("ResetSyncCheckpoint: failed to write sync checkpoint %s", hash.ToString().c_str());
-    printf("ResetSyncCheckpoint: sync-checkpoint reset to %s\n", hashSyncCheckpoint.ToString().c_str());
+    printf("ResetSyncCheckpoint: sync-checkpoint reset to %s\n", GetHashSyncCheckPoint().ToString().c_str());
     return true;
 }
 
@@ -310,6 +323,7 @@ bool SetCheckpointPrivKey(std::string strPrivKey)
     // Test signing a sync-checkpoint with genesis block
     CSyncCheckpoint checkpoint;
     checkpoint.hashCheckpoint = hashGenesisBlock;
+    printf("%s\n", hashGenesisBlock.ToString().c_str());
     CDataStream sMsg(SER_NETWORK, PROTOCOL_VERSION);
     sMsg << (CUnsignedSyncCheckpoint)checkpoint;
     checkpoint.vchMsg = std::vector<unsigned char>(sMsg.begin(), sMsg.end());
@@ -369,8 +383,9 @@ bool IsMatureSyncCheckpoint()
 {
     LOCK(cs_hashSyncCheckpoint);
     // sync-checkpoint should always be accepted block
-    assert(mapBlockIndex.count(hashSyncCheckpoint));
-    const CBlockIndex* pindexSync = mapBlockIndex[hashSyncCheckpoint];
+    uint256 hashSyncCheckP = GetHashSyncCheckPoint();
+    assert(mapBlockIndex.count(hashSyncCheckP));
+    const CBlockIndex* pindexSync = mapBlockIndex[hashSyncCheckP];
     return (nBestHeight >= pindexSync->nHeight + COINBASE_MATURITY);
 }
 
@@ -379,8 +394,9 @@ bool IsSyncCheckpointTooOld(unsigned int nSeconds)
 {
     LOCK(cs_hashSyncCheckpoint);
     // sync-checkpoint should always be accepted block
-    assert(mapBlockIndex.count(hashSyncCheckpoint));
-    const CBlockIndex* pindexSync = mapBlockIndex[hashSyncCheckpoint];
+    uint256 hashSyncCheckP = GetHashSyncCheckPoint();
+    assert(mapBlockIndex.count(hashSyncCheckP));
+    const CBlockIndex* pindexSync = mapBlockIndex[hashSyncCheckP];
     return (pindexSync->GetBlockTime() + nSeconds < GetAdjustedTime());
 }
 
@@ -470,10 +486,11 @@ Value getcheckpoint(const Array& params, bool fHelp)
     Object result;
     CBlockIndex* pindexCheckpoint;
 
-    result.push_back(Pair("synccheckpoint", hashSyncCheckpoint.ToString().c_str()));
-    if (mapBlockIndex.count(hashSyncCheckpoint))
+    uint256 hashSyncCheckP = GetHashSyncCheckPoint();
+    result.push_back(Pair("synccheckpoint", hashSyncCheckP.ToString().c_str()));
+    if (mapBlockIndex.count(hashSyncCheckP))
     {
-        pindexCheckpoint = mapBlockIndex[hashSyncCheckpoint];
+        pindexCheckpoint = mapBlockIndex[hashSyncCheckP];
         result.push_back(Pair("height", pindexCheckpoint->nHeight));
         result.push_back(Pair("timestamp", (boost::int64_t) pindexCheckpoint->GetBlockTime()));
     }
@@ -503,10 +520,11 @@ Value sendcheckpoint(const Array& params, bool fHelp)
     Object result;
     CBlockIndex* pindexCheckpoint;
 
-    result.push_back(Pair("synccheckpoint", hashSyncCheckpoint.ToString().c_str()));
-    if (mapBlockIndex.count(hashSyncCheckpoint))
+    uint256 hashSyncCheckP = GetHashSyncCheckPoint();
+    result.push_back(Pair("synccheckpoint", hashSyncCheckP.ToString().c_str()));
+    if (mapBlockIndex.count(hashSyncCheckP))
     {
-        pindexCheckpoint = mapBlockIndex[hashSyncCheckpoint];
+        pindexCheckpoint = mapBlockIndex[hashSyncCheckP];
         result.push_back(Pair("height", pindexCheckpoint->nHeight));
         result.push_back(Pair("timestamp", (boost::int64_t) pindexCheckpoint->GetBlockTime()));
     }
