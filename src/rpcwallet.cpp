@@ -343,38 +343,23 @@ Value signmessage(const Array& params, bool fHelp)
     if (!key.Sign(ss.GetHash(), vchSig))
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Sign failed");
 
-    return EncodeBase64(&vchSig[0], vchSig.size());
+    return HexStr(vchSig.begin(), vchSig.end());
 }
 
 Value verifymessage(const Array& params, bool fHelp)
 {
     
-    if (fHelp || params.size() != 4)
+    if (fHelp || params.size() != 3)
         throw runtime_error(
-            "verifymessage <maxcoinaddress> <publickey> <signature> <message>\n"
+            "verifymessage <publickey> <signature> <message>\n"
             "Verify a signed message");
 
-    string strAddress  = params[0].get_str();
-    string strPubKey   = params[1].get_str();
-    string strSign     = params[2].get_str();
-    string strMessage  = params[3].get_str();
+    string strPubKey   = params[0].get_str();
+    string strSign     = params[1].get_str();
+    string strMessage  = params[2].get_str();
 
-    CBitcoinAddress addr(strAddress);
-    if (!addr.IsValid())
-        throw JSONRPCError(RPC_TYPE_ERROR, "Invalid address");
-
-    CKeyID keyID;
-    if (!addr.GetKeyID(keyID))
-        throw JSONRPCError(RPC_TYPE_ERROR, "Address does not refer to key");
-
-    bool fInvalid = false;
-    vector<unsigned char> vchSig = DecodeBase64(strSign.c_str(), &fInvalid);
-    if (fInvalid)
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Malformed base64 encoding in signature");
-
-    vector<unsigned char> vchPubKey = DecodeBase64(strPubKey.c_str(), &fInvalid);
-    if (fInvalid)
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Malformed base64 encoding in public key");    
+    vector<unsigned char> vchSig = ParseHex(strSign);
+    vector<unsigned char> vchPubKey = ParseHex(strPubKey);  
 
     CHashWriter ss(SER_GETHASH, 0);
     ss << strMessageMagic;
@@ -385,7 +370,7 @@ Value verifymessage(const Array& params, bool fHelp)
     if (!key.Verify(ss.GetHash(), vchSig))
         return false;
 
-    return (key.GetPubKey().GetID() == keyID);
+    return true;
 }
 
 
@@ -1452,8 +1437,7 @@ public:
         CPubKey vchPubKey;
         pwalletMain->GetPubKey(keyID, vchPubKey);
         obj.push_back(Pair("isscript", false));
-        //obj.push_back(Pair("pubkey", HexStr(vchPubKey.Raw())));
-        obj.push_back(Pair("pubkey", EncodeBase64(&vchPubKey.Raw()[0], vchPubKey.Raw().size())));
+        obj.push_back(Pair("pubkey", HexStr(vchPubKey.Raw())));
         obj.push_back(Pair("iscompressed", vchPubKey.IsCompressed()));
         return obj;
     }

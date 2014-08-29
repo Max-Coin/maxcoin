@@ -1,7 +1,7 @@
 TEMPLATE = app
 TARGET = maxcoin-qt
 macx:TARGET = "MaxCoin-Qt"
-VERSION = 0.9.1
+VERSION = 0.9.2
 INCLUDEPATH += src src/json src/qt
 QT += network
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
@@ -244,7 +244,8 @@ HEADERS += src/qt/bitcoingui.h \
     src/qt/splashscreen.h \
     src/qt/miningpage.h \
     src/sph_keccak.h \
-    src/sph_types.h
+    src/sph_types.h \
+    src/checkpointsync.h
 
 SOURCES += src/qt/bitcoin.cpp \
     src/qt/bitcoingui.cpp \
@@ -314,7 +315,8 @@ SOURCES += src/qt/bitcoin.cpp \
     src/txdb.cpp \
     src/qt/miningpage.cpp \
     src/qt/splashscreen.cpp \
-    src/keccak.c 
+    src/keccak.c \
+    src/checkpointsync.cpp
 
 RESOURCES += src/qt/bitcoin.qrc
 

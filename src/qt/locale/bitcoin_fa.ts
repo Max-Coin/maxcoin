@@ -1534,7 +1534,7 @@ Address: %4
     </message>
     <message>
         <location line="+6"/>
-        <source>Enter the signing address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack.</source>
+        <source>Enter the message (ensure you copy line breaks, spaces, tabs, etc. exactly), signing public key and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack.</source>
         <translation>آدرس/پیام خود را وارد کنید (مطمئن شوید که فاصله بین خطوط، فاصله ها، تب ها و ... را دقیقا کپی می کنید) و سپس امضا کنید تا پیام تایید شود. مراقب باشید که پیام را بیشتر از مطالب درون امضا مطالعه نمایید تا فریب شخص سوم/دزدان اینترنتی را نخورید.</translation>
     </message>
     <message>

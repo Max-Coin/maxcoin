@@ -210,9 +210,6 @@ void WalletView::gotoVerifyMessageTab(QString addr)
 {
     // call show() in showTab_VM()
     signVerifyMessageDialog->showTab_VM(true);
-
-    if (!addr.isEmpty())
-        signVerifyMessageDialog->setAddress_VM(addr);
 }
 
 bool WalletView::handleURI(const QString& strURI)

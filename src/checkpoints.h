@@ -24,6 +24,12 @@ namespace Checkpoints
     CBlockIndex* GetLastCheckpoint(const std::map<uint256, CBlockIndex*>& mapBlockIndex);
 
     double GuessVerificationProgress(CBlockIndex *pindex);
+
+    // Returns the last available checkpoint in the main chain
+    uint256 GetLastAvailableCheckpoint();
+
+    // Returns the block hash of latest hardened checkpoint
+    uint256 GetLatestHardenedCheckpoint();
 }
 
 #endif
