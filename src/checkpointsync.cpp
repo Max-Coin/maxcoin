@@ -551,3 +551,16 @@ Value enforcecheckpoint(const Array& params, bool fHelp)
     mapArgs["-checkpointenforce"] = (fEnforceCheckpoint ? "1" : "0");
     return Value::null;
 }
+
+Value resetcheckpoint(const Array& params, bool fHelp)
+{
+    if (fHelp || params.size() != 0)
+        throw runtime_error(
+            "resetcheckpoint\n"
+            "Reset stored synchronized checkpoint");
+
+    if (!ResetSyncCheckpoint())
+        throw runtime_error("could not reset synchronized checkpoint.");
+
+    return Value::null;
+}

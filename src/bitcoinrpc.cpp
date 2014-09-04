@@ -268,6 +268,7 @@ static const CRPCCommand vRPCCommands[] =
     { "getcheckpoint",          &getcheckpoint,          true,      false },
     { "sendcheckpoint",         &sendcheckpoint,         true,      false },
     { "enforcecheckpoint",      &enforcecheckpoint,      true,      false },
+    { "resetcheckpoint",        &resetcheckpoint,        true,      false },
 };
 
 CRPCTable::CRPCTable()
