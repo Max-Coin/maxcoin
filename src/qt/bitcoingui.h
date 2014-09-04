@@ -79,6 +79,7 @@ protected:
 
 private:
     ClientModel *clientModel;
+    WalletModel *walletModel;
     WalletFrame *walletFrame;
 
     QLabel *labelEncryptionIcon;
@@ -104,6 +105,8 @@ private:
     QAction *encryptWalletAction;
     QAction *backupWalletAction;
     QAction *changePassphraseAction;
+    QAction *lockWalletAction;
+    QAction *unlockWalletAction;
     QAction *aboutQtAction;
     QAction *openRPCConsoleAction;
 

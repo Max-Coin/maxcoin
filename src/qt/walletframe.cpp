@@ -125,6 +125,11 @@ void WalletFrame::changePassphrase()
     walletStack->changePassphrase();
 }
 
+void WalletFrame::lockWallet()
+{
+    walletStack->lockWallet();
+}
+
 void WalletFrame::unlockWallet()
 {
     walletStack->unlockWallet();
@@ -134,3 +139,4 @@ void WalletFrame::setEncryptionStatus()
 {
     walletStack->setEncryptionStatus();
 }
+
