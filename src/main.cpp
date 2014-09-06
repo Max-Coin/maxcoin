@@ -3419,7 +3419,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
 
         if (pfrom->cleanSubVer.find("/Max:0.9.1/") != std::string::npos)
         {
-            LogPrintf("Client %s runs obsolete version 0.9.1, disconnecting\n", pfrom->addr.ToString());
+            printf("Client %s runs obsolete version 0.9.1, disconnecting\n", pfrom->addr.ToString());
             pfrom->fDisconnect = true;
             return true;
         }

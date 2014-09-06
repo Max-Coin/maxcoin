@@ -704,6 +704,8 @@ static CScript _createmultisig(const Array& params)
     int nRequired = params[0].get_int();
     const Array& keys = params[1].get_array();
 
+    printf("_createmultisig() : Got keys array\n");
+
     // Gather public keys
     if (nRequired < 1)
         throw runtime_error("a multisignature address must require at least one key to redeem");
@@ -712,7 +714,7 @@ static CScript _createmultisig(const Array& params)
             strprintf("not enough keys supplied "
                       "(got %"PRIszu" keys, but need at least %d to redeem)", keys.size(), nRequired));
     std::vector<CKey> pubkeys;
-    pubkeys.resize(keys.size());
+    // pubkeys.resize(keys.size());
     for (unsigned int i = 0; i < keys.size(); i++)
     {
         const std::string& ks = keys[i].get_str();
@@ -729,22 +731,48 @@ static CScript _createmultisig(const Array& params)
             if (!pwalletMain->GetPubKey(keyID, vchPubKey))
                 throw runtime_error(
                     strprintf("no full public key for address %s",ks.c_str()));
-            if (!vchPubKey.IsValid() || !pubkeys[i].SetPubKey(vchPubKey))
+
+            CPubKey pubKey = CPubKey(vchPubKey);
+            if (!pubKey.IsValid())
                 throw runtime_error(" Invalid public key: "+ks);
+
+            CKey key;
+            if (!key.SetPubKey(pubKey))
+                throw runtime_error(" Could not set public key: "+ks);   
+
+            // pubkeys[i] = key;
+            pubkeys.push_back(key);
         }
 
         // Case 2: hex public key
         else if (IsHex(ks))
         {
-            CPubKey vchPubKey(ParseHex(ks));
-            if (!vchPubKey.IsValid() || !pubkeys[i].SetPubKey(vchPubKey))
+            vector<unsigned char> vchPubKey = ParseHex(ks);
+            CPubKey pubKey = CPubKey(vchPubKey);
+
+            if (!pubKey.IsValid())
                 throw runtime_error(" Invalid public key: "+ks);
+
+            CKey key;
+            if (!key.SetPubKey(pubKey))
+                throw runtime_error(" Could not set public key: "+ks);
+
+            // pubkeys[i] = key;
+            pubkeys.push_back(key);
+
+            CPubKey pubKey2 = key.GetPubKey(); // WORKS
+            printf("cheerios!\n");
+            CKey key2 = pubkeys[i];
+            CPubKey pubKey3 = key2.GetPubKey(); // FAILS
+            printf("cocopops\n");
+            CPubKey pubKey4 = pubkeys[i].GetPubKey(); // FAILS
         }
         else
         {
             throw runtime_error(" Invalid public key: "+ks);
         }
     }
+    printf("_createmultisig() : Calling SetMultisig()\n");
     CScript result;
     result.SetMultisig(nRequired, pubkeys);
     return result;
@@ -1561,4 +1589,5 @@ Value listlockunspent(const Array& params, bool fHelp)
 
     return ret;
 }
+
 

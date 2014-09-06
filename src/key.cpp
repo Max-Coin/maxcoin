@@ -128,7 +128,6 @@ void CKey::MakeNewKey(bool fCompressed)
     
     if (!GeneratePublicKey())
         throw new key_error("CKey::MakeNewKey : could not generate public key");
-    
 
     if (fCompressed)
         SetCompressedPubKey();
@@ -164,23 +163,30 @@ CSecret CKey::GetSecret(bool &fCompressed) const
     return vchSecret;
 }
 
-bool CKey::SetPubKey(const CPubKey& vchPubKey)
+#include "util.h"
+
+bool CKey::SetPubKey(const CPubKey& pubKey)
 {
-    ECPPoint publicKey;
-    if (!ec.DecodePoint (publicKey, &vchPubKey.vchPubKey[0], vchPubKey.vchPubKey.size()))
+    ECPPoint pubKeyPoint;
+    if (!ec.DecodePoint(pubKeyPoint, &pubKey.vchPubKey[0], pubKey.vchPubKey.size()))
         return false;
 
-    SetCompressedPubKey(vchPubKey.vchPubKey.size() == 33);
-    Q = publicKey;
+    SetCompressedPubKey(pubKey.vchPubKey.size() == 33);
+    Q = pubKeyPoint;
     fSet = true;
     return true;
 }
 
 CPubKey CKey::GetPubKey() const
 {
+    printf("CKey::GetPubKey() : here\n");
     std::vector<unsigned char> vchPubKey;
+    printf("CKey::GetPubKey() : here 2\n");
+    printf("CKey::GetPubKey() : ec.EncodedPointSize(fCompressedPubKey) is %d\n", ec.EncodedPointSize(fCompressedPubKey));
     vchPubKey.resize(ec.EncodedPointSize(fCompressedPubKey));
+    printf("CKey::GetPubKey() : here 3\n");
     ec.EncodePoint(&vchPubKey[0], Q, fCompressedPubKey);
+    printf("CKey::GetPubKey() : here 4\n");
     return CPubKey(vchPubKey);
 }
 
