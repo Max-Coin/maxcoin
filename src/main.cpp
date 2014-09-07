@@ -3417,6 +3417,20 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
             pfrom->cleanSubVer = SanitizeString(pfrom->strSubVer);
         }
 
+        if (pfrom->cleanSubVer.find("/Max:0.8.9/") != std::string::npos)
+        {
+            printf("Client %s runs obsolete version 0.8.9, disconnecting\n", pfrom->addr.ToString().c_str());
+            pfrom->fDisconnect = true;
+            return true;
+        }
+
+        if (pfrom->cleanSubVer.find("/Max:0.9.0/") != std::string::npos)
+        {
+            printf("Client %s runs obsolete version 0.9.0, disconnecting\n", pfrom->addr.ToString().c_str());
+            pfrom->fDisconnect = true;
+            return true;
+        }
+
         if (pfrom->cleanSubVer.find("/Max:0.9.1/") != std::string::npos)
         {
             printf("Client %s runs obsolete version 0.9.1, disconnecting\n", pfrom->addr.ToString().c_str());
