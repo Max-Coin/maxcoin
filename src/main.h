@@ -28,6 +28,7 @@ struct CBlockIndexWorkComparator;
 static const int64 BLOCK_HEIGHT_FORK1 = 140000;
 static const int64 BLOCK_HEIGHT_FORK2 = 177500;
 static const int64 BLOCK_HEIGHT_FORK3 = 600000;
+static const int64 BLOCK_HEIGHT_FORK4 = 635000;
 
 /** The maximum allowed size for a serialized block, in bytes (network rule) */
 static const unsigned int MAX_BLOCK_SIZE = 1000000;
