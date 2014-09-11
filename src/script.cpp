@@ -1845,16 +1845,10 @@ void CScript::SetDestination(const CTxDestination& dest)
 void CScript::SetMultisig(int nRequired, const std::vector<CKey>& keys)
 {
     this->clear();
-
-    printf("CScript::SetMultisig() : called with %d keys\n", keys.size());
-
-    printf("CScript::SetMultisig() : calling EncodeOP_N(%d)\n", nRequired);
     *this << EncodeOP_N(nRequired);
     BOOST_FOREACH(const CKey& key, keys) {
-        printf("CScript::SetMultisig() : calling key.GetPubKey()\n");
-        *this << key.GetPubKey(); // I DONT THINK THIS IS POPULATED
+        *this << key.GetPubKey();
     }
-    printf("CScript::SetMultisig() : calling EncodeOP_N(%d)\n", keys.size());
     *this << EncodeOP_N(keys.size()) << OP_CHECKMULTISIG;
 }
 

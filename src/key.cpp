@@ -179,14 +179,9 @@ bool CKey::SetPubKey(const CPubKey& pubKey)
 
 CPubKey CKey::GetPubKey() const
 {
-    printf("CKey::GetPubKey() : here\n");
     std::vector<unsigned char> vchPubKey;
-    printf("CKey::GetPubKey() : here 2\n");
-    printf("CKey::GetPubKey() : ec.EncodedPointSize(fCompressedPubKey) is %d\n", ec.EncodedPointSize(fCompressedPubKey));
     vchPubKey.resize(ec.EncodedPointSize(fCompressedPubKey));
-    printf("CKey::GetPubKey() : here 3\n");
     ec.EncodePoint(&vchPubKey[0], Q, fCompressedPubKey);
-    printf("CKey::GetPubKey() : here 4\n");
     return CPubKey(vchPubKey);
 }
 

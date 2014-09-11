@@ -704,8 +704,6 @@ static CScript _createmultisig(const Array& params)
     int nRequired = params[0].get_int();
     const Array& keys = params[1].get_array();
 
-    printf("_createmultisig() : Got keys array\n");
-
     // Gather public keys
     if (nRequired < 1)
         throw runtime_error("a multisignature address must require at least one key to redeem");
@@ -760,19 +758,16 @@ static CScript _createmultisig(const Array& params)
             // pubkeys[i] = key;
             pubkeys.push_back(key);
 
-            CPubKey pubKey2 = key.GetPubKey(); // WORKS
-            printf("cheerios!\n");
+            CPubKey pubKey2 = key.GetPubKey();
             CKey key2 = pubkeys[i];
-            CPubKey pubKey3 = key2.GetPubKey(); // FAILS
-            printf("cocopops\n");
-            CPubKey pubKey4 = pubkeys[i].GetPubKey(); // FAILS
+            CPubKey pubKey3 = key2.GetPubKey();
+            CPubKey pubKey4 = pubkeys[i].GetPubKey();
         }
         else
         {
             throw runtime_error(" Invalid public key: "+ks);
         }
     }
-    printf("_createmultisig() : Calling SetMultisig()\n");
     CScript result;
     result.SetMultisig(nRequired, pubkeys);
     return result;
