@@ -34,7 +34,7 @@ const std::string CLIENT_NAME("Max");
 #endif
 
 // git will put "#define GIT_ARCHIVE 1" on the next line inside archives. 
-#define GIT_ARCHIVE 1
+#define GIT_ARCHIVE 0
 #ifdef GIT_ARCHIVE
 #    define GIT_COMMIT_ID "8c5e74e"
 #    define GIT_COMMIT_DATE "$Format:%cD"
