@@ -27,8 +27,8 @@ extern const std::string CLIENT_DATE;
 
 static const int PROTOCOL_VERSION = 70004;
 
-// earlier versions not supported as of 0.9.2.1
-static const int MIN_PROTO_VERSION = 70003;
+// earlier versions not supported
+static const int MIN_PROTO_VERSION = 70000;
 
 // nTime field added to CAddress, starting with this version;
 // if possible, avoid requesting addresses nodes older than this
