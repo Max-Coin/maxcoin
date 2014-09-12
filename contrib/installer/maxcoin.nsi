@@ -12,8 +12,8 @@
 # version
 !define VERSIONMAJOR 0
 !define VERSIONMINOR 9
-!define VERSIONBUILD 1
-!define VERSIONINCRM 0
+!define VERSIONBUILD 3
+!define VERSIONINCRM 1
 
 # These will be displayed by the "Click here for support information" link in "Add/Remove Programs"
 !define HELPURL "http://maxcoin.co.uk" # "Support Information" link
