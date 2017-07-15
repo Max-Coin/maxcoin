@@ -15,7 +15,7 @@ $ git clone https://github.com/Max-Coin/MaxCoin.git
 
 To build the daemon, run the following commands
 
-$ cd maxcoin/src
+$ cd MaxCoin/src
 
 $ make -f makefile.unix
 
