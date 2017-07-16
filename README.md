@@ -1,7 +1,7 @@
 What is MaxCoin?
 ==============
 
-An alternative cryptocurrency disrupting the already rather disrupting crypto market.
+Maxcoin is an alternative cryptocurrency introduced in 2014.
 
 Technical Information
 
