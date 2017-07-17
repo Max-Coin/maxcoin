@@ -6,7 +6,7 @@ Maxcoin is an alternative cryptocurrency introduced in 2014.
 Technical Information
 
 + ~100,000,000 coins
-+ 16 coins rewarded per block, halving every 4 years
++ 8 coins rewarded per block, halving every 4 years
 + 60 second block times
 + difficulty retargeting using a time-warp resistant implementation of KGW
 
