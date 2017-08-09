@@ -21,7 +21,7 @@ USE_UPNP:=-
 USE_IPV6:=1
 
 DEPSDIR?=/usr/local
-BOOST_SUFFIX?=-mgw48-mt-s-1_55
+BOOST_SUFFIX?=-mgw49-mt-s-1_55
 
 INCLUDEPATHS= \
  -I"$(CURDIR)" \
