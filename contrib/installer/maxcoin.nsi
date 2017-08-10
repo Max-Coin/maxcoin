@@ -20,7 +20,7 @@
 !define UPDATEURL "http://maxcoin.co.uk" # "Product Updates" link
 !define ABOUTURL "http://maxcoin.co.uk" # "Publisher" link
 # This is the size (in kB) of all the files copied into "Program Files"
-!define INSTALLSIZE 28833
+!define INSTALLSIZE 27882
  
 RequestExecutionLevel admin ;Require admin rights on NT6+ (When UAC is turned on)
  
@@ -67,13 +67,11 @@ section "install"
 	# Files for the install directory - to build the installer, these should be in the same directory as the install script (this file)
 	setOutPath $INSTDIR
 	# Files added here should be removed by the uninstaller (see section "uninstall")
-	file "libgcc_s_dw2-1.dll"
-	file "libstdc++-6.dll"
-	file "libwinpthread-1.dll"
 	file "maxcoind.exe"
 	file "maxcoin-qt.exe"
 	file "maxcoin.ico"
 	file "README.txt"
+	file "maxcoin-SAMPLE.conf"
 	# Add any other files for the install directory (license files, app data, etc) here
  
 	# Uninstaller - See function un.onInit and section "uninstall" for configuration
@@ -125,13 +123,11 @@ section "uninstall"
 	rmDir "$SMPROGRAMS\${APPNAME}"
  
 	# Remove files
-	delete $INSTDIR\libgcc_s_dw2-1.dll
-	delete $INSTDIR\libstdc++6.dll
-	delete $INSTDIR\libwinpthread-1.dll
 	delete $INSTDIR\maxcoind.exe
 	delete $INSTDIR\maxcoin-qt.exe
 	delete $INSTDIR\maxcoin.ico
 	delete $INSTDIR\README.txt
+	delete $INSTDIR\maxcoin-SAMPLE.conf
  
 	# Always delete uninstaller as the last action
 	delete $INSTDIR\uninstall.exe
