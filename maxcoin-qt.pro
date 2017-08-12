@@ -20,16 +20,18 @@ DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x000000
 #    BOOST_INCLUDE_PATH, BOOST_LIB_PATH, BDB_INCLUDE_PATH,
 #    BDB_LIB_PATH, OPENSSL_INCLUDE_PATH and OPENSSL_LIB_PATH respectively
 
-BOOST_LIB_SUFFIX=-mgw49-mt-s-1_55
-BOOST_INCLUDE_PATH=C:\deps\boost_1_55_0
-BOOST_LIB_PATH=C:\deps\boost_1_55_0\stage\lib
-BDB_INCLUDE_PATH=C:\deps\db-4.8.30.NC\build_unix
-BDB_LIB_PATH=C:\deps\db-4.8.30.NC\build_unix
-OPENSSL_INCLUDE_PATH=C:\deps\openssl-1.0.1f\include
-OPENSSL_LIB_PATH=C:\deps\openssl-1.0.1f
+BOOST_LIB_SUFFIX=-mgw49-mt-s-1_54
+BOOST_INCLUDE_PATH=C:/deps/boost_1_54_0
+BOOST_LIB_PATH=C:/deps/boost_1_54_0/stage/lib
+BDB_INCLUDE_PATH=C:/deps/db-5.1.29.NC/build_unix
+BDB_LIB_PATH=C:/deps/db-5.1.29.NC/build_unix
+OPENSSL_INCLUDE_PATH=C:/deps/openssl-1.0.1f/include
+OPENSSL_LIB_PATH=C:/deps/openssl-1.0.1f
 MINIUPNPC_LIB_SUFFIX=-miniupnpc
-MINIUPNPC_INCLUDE_PATH=C:\deps\miniupnpc-1.8
-MINIUPNPC_LIB_PATH=C:\deps\miniupnpc-1.8
+MINIUPNPC_INCLUDE_PATH=C:/deps/miniupnpc-1.6
+MINIUPNPC_LIB_PATH=C:/deps/miniupnpc-1.6
+QRENCODE_INCLUDE_PATH=C:/deps/qrencode-3.4.4
+QRENCODE_LIB_PATH=C:/deps/qrencode-3.4.4/.libs
 
 OBJECTS_DIR = build
 MOC_DIR = build
