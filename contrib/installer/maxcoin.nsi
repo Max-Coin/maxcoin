@@ -71,7 +71,7 @@ section "install"
 	file "maxcoin-qt.exe"
 	file "maxcoin.ico"
 	file "README.txt"
-	file "maxcoin-SAMPLE.conf"
+	file "maxcoin-EXAMPLE.conf"
 	# Add any other files for the install directory (license files, app data, etc) here
  
 	# Uninstaller - See function un.onInit and section "uninstall" for configuration
@@ -127,7 +127,7 @@ section "uninstall"
 	delete $INSTDIR\maxcoin-qt.exe
 	delete $INSTDIR\maxcoin.ico
 	delete $INSTDIR\README.txt
-	delete $INSTDIR\maxcoin-SAMPLE.conf
+	delete $INSTDIR\maxcoin-EXAMPLE.conf
  
 	# Always delete uninstaller as the last action
 	delete $INSTDIR\uninstall.exe
