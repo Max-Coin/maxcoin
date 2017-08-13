@@ -67,11 +67,11 @@ section "install"
 	# Files for the install directory - to build the installer, these should be in the same directory as the install script (this file)
 	setOutPath $INSTDIR
 	# Files added here should be removed by the uninstaller (see section "uninstall")
-	file "maxcoind.exe"
-	file "maxcoin-qt.exe"
+	file "..\..\src\maxcoind.exe"
+	file "..\..\release\maxcoin-qt.exe"
 	file "maxcoin.ico"
 	file "README.txt"
-	file "maxcoin-EXAMPLE.conf"
+	file "..\..\maxcoin-EXAMPLE.conf"
 	# Add any other files for the install directory (license files, app data, etc) here
  
 	# Uninstaller - See function un.onInit and section "uninstall" for configuration
