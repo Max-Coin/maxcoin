@@ -20,6 +20,9 @@ DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x000000
 #    BOOST_INCLUDE_PATH, BOOST_LIB_PATH, BDB_INCLUDE_PATH,
 #    BDB_LIB_PATH, OPENSSL_INCLUDE_PATH and OPENSSL_LIB_PATH respectively
 
+# Uncomment the BOOST_LIB_SUFFIX through QRENCODE_LIB_PATH definitions below 
+# when building for Windows or include each of these definitions as parameters 
+# when calling qmake (ex. qmake "BOOST_LIB_SUFFIX=-mgw49-mt-s-1_54").
 #BOOST_LIB_SUFFIX=-mgw49-mt-s-1_54
 #BOOST_INCLUDE_PATH=C:/deps/boost_1_54_0
 #BOOST_LIB_PATH=C:/deps/boost_1_54_0/stage/lib
@@ -30,8 +33,8 @@ DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x000000
 #MINIUPNPC_LIB_SUFFIX=-miniupnpc
 #MINIUPNPC_INCLUDE_PATH=C:/deps/miniupnpc-1.6
 #MINIUPNPC_LIB_PATH=C:/deps/miniupnpc-1.6
-#QRENCODE_INCLUDE_PATH=C:/deps/qrencode-3.4.4
-#QRENCODE_LIB_PATH=C:/deps/qrencode-3.4.4/.libs
+#QRENCODE_INCLUDE_PATH=C:/deps/qrencode-3.4.2
+#QRENCODE_LIB_PATH=C:/deps/qrencode-3.4.2/.libs
 
 OBJECTS_DIR = build
 MOC_DIR = build
