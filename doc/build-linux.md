@@ -5,31 +5,40 @@ NOTE: These instructions have been tested and verified on Ubuntu 14.04.5 (32 and
 
 To install the required dependencies, run the following command from Ubuntu:
 
-	sudo apt-get update
-	sudo apt-get install -y git-core build-essential libssl-dev libboost-all-dev libdb-dev libdb++-dev libminiupnpc-dev libqrencode-dev libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools qt-sdk
+```
+sudo apt-get update
+sudo apt-get install -y git-core build-essential libssl-dev libboost-all-dev libdb-dev libdb++-dev libminiupnpc-dev libqrencode-dev libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools qt-sdk
+```
 
 or the following command from Debian (NOTE: the Debian packages below have not been reviewed recently and may be outdated):
 
-	sudo apt-get install -y git-core build-essential libssl-dev libboost-all-dev libdb-dev libdb4.8++-dev libgtk2.0-dev qt4-qmake mingw32 synaptic qt-sdk qt4-dev-tools libqt4-dev libqt4-core libqt4-gui libdb4.8++-dev
-
+```
+sudo apt-get install -y git-core build-essential libssl-dev libboost-all-dev libdb-dev libdb4.8++-dev libgtk2.0-dev qt4-qmake mingw32 synaptic qt-sdk qt4-dev-tools libqt4-dev libqt4-core libqt4-gui libdb4.8++-dev
+```
 
 Then grab the latest version of the MaxCoin source code from Github:
 
-	cd ~
-	git clone https://github.com/Max-Coin/MaxCoin.git
-	cd MaxCoin/src
+```
+cd ~
+git clone https://github.com/Max-Coin/MaxCoin.git
+cd MaxCoin/src
+```
 
 To build the daemon, run the following command:
 
-	make -f makefile.unix
+```
+make -f makefile.unix
+```
 
 Optionally, debugging symbols can be removed from the binary to reduce its size. This can be done using strip:
 
-	strip maxcoind
+```
+strip maxcoind
+```
 
 Then, to build the GUI, run the following commands:
 
-	cd ..
-	qmake maxcoin-qt.pro
-	make
-
+```
+cd ..
+qmake maxcoin-qt.pro
+make
