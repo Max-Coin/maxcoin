@@ -1,67 +1,45 @@
 Building on Linux
 ===============
 
+NOTE: These instructions have been tested and verified on Ubuntu 14.04.5 (32 and 64 bit).  Instructions for building on other Ubuntu versions and other Linux platforms still need further testing.
+
 To install the required dependencies, run the following command from Ubuntu:
 
-$ sudo apt-get install git-core build-essential libssl-dev libboost-all-dev libdb5.1-dev libdb5.1++-dev libgtk2.0-dev libminiupnpc-dev qt4-qmake mingw32 synaptic qt-sdk qt4-dev-tools libqt4-dev libqt4-core libqt4-gui miniupnpc
+```bash
+sudo apt-get update
+sudo apt-get install -y git-core build-essential libssl-dev libboost-all-dev libdb-dev libdb++-dev libminiupnpc-dev libqrencode-dev libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools qt-sdk
+```
+or the following command from Debian (NOTE: the Debian packages below have not been reviewed recently and may be outdated):
 
-or the following command from Debian:
+````bash
+sudo apt-get install -y git-core build-essential libssl-dev libboost-all-dev libdb-dev libdb4.8++-dev libgtk2.0-dev qt4-qmake mingw32 synaptic qt-sdk qt4-dev-tools libqt4-dev libqt4-core libqt4-gui libdb4.8++-dev
+````
 
-$ sudo apt-get install git-core build-essential libssl-dev libboost-all-dev libdb-dev libdb4.8++-dev libgtk2.0-dev qt4-qmake mingw32 synaptic qt-sdk qt4-dev-tools libqt4-dev libqt4-core libqt4-gui libdb4.8++-dev
+Then grab the latest version of the MaxCoin source code from Github:
 
-Then grab the latest version of the MaxCoin source code from Github
+```bash
+cd ~
+git clone https://github.com/Max-Coin/MaxCoin.git
+cd MaxCoin/src
+```
 
-$ git clone https://github.com/Max-Coin/MaxCoin.git
+To build the daemon, run the following command:
 
-To build the daemon, run the following commands
+```bash
+make -f makefile.unix
+```
 
-$ cd MaxCoin/src
+Optionally, debugging symbols can be removed from the binary to reduce its size. This can be done using strip:
 
-$ make -f makefile.unix
-
-Optionally, debugging symbols can be removed from the binary to reduce it's size. This can be done using strip.
-
-$ strip maxcoind
+```bash
+strip maxcoind
+```
 
 Then, to build the GUI, run the following commands:
 
-$ cd ..
+```bash
+cd ..
+qmake "USE_QRCODE=1" "USE_UPNP=1" "USE_IPV6=1" maxcoin-qt.pro
+make
+```
 
-$ qmake
-
-$ make
-
-Troubleshooting:
--------------
-
-Building miniupnpc
-----------------
-
-If your OS doesn't support libminiupnpc, you can build this manually by performing the following steps:
-
-Don't use miniupnpc-1.6 as its broken an qmake compilation will fail to build Maxcoin-QT.
-
-$ wget 'http://miniupnp.free.fr/files/download.php?file=miniupnpc-1.5.tar.gz' -O miniupnpc-1.5.tar.gz
-
-$ tar -xzvf miniupnpc-1.5.tar.gz
-
-$ cd miniupnpc-1.5
-	
-$ make
-
-$	make install
-
-Cleaning the build:
-----------------=
-
-If you have to clean your build environment you may have to rebuild LevelDB manually. This can be done using:
-
-$ cd src/leveldb
-
-$ chmod +x build_detect_platform
-
-$ ./build_detect_platform
-
-Ignore the usage errors (it still builds the relevent file) and now run:
-
-$ make libleveldb.a libmemenv.a
