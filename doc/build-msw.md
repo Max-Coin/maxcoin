@@ -53,15 +53,15 @@ NOTE: These instructions were developed and tested on Windows 7 Professional (64
 3. Click "Install".
 4. Accept all defaults and click "Continue".
 5. When MinGW Installation Manager opens, select "All Packages" on the left-hand pane.
-6. Select the following packages as "Mark for Installation"
+6. Select the following packages as "Mark for Installation":
 
-	Package         Class
-	---------------------
-	msys-base       bin
-	msys-autoconf   bin
-	msys-automake   bin
-	msys-libtool    bin
-	msys-wget       bin
+	| Package       | Class |
+	| ------------- | ----- |
+	| msys-base     | bin   |
+	| msys-autoconf | bin   |
+	| msys-automake | bin   |
+	| msys-libtool  | bin   |
+	| msys-wget     | bin   |
 
 7. Make sure no mingw packages are checked for installation or present from a previous install. Only the above msys packages should be installed. Also make sure that "msys-gcc" and "msys-w32api" packages are not installed.
 8. On the application menu, select "Installation" -> "Apply Changes", then click "Apply".
@@ -69,8 +69,9 @@ NOTE: These instructions were developed and tested on Windows 7 Professional (64
 10. "C:\MinGW\bin" should contain nothing but "mingw-get.exe".
 11. Add "C:\MinGW\msys\1.0" to the PATH environment variable ("Control Panel" -> "System and Security" -> "System" -> "Advanced system settings" -> "Environment Variables..." -> "System variables").  On Windows 7, the path should end up looking something like:
 
-	C:\MinGW\msys\1.0;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
-
+```
+C:\MinGW\msys\1.0;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
+```
 
 1.2 Install MinGW Toolchain
 ---------------------------
@@ -78,26 +79,33 @@ NOTE: These instructions were developed and tested on Windows 7 Professional (64
 2. Using 7Zip, unpack the "i686-4.9.2-release-posix-dwarf-rt_v3-rev1.7z" source archive to "C:\".
 3. Add "C:\mingw32\bin" to the PATH environment variable.  On Windows 7, the path should end up looking something like:
 
-	Code: C:\mingw32\bin;C:\MinGW\msys\1.0;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
+```
+C:\mingw32\bin;C:\MinGW\msys\1.0;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
+```
 
 4. From a DOS shell (cmd.exe run as Administrator), run "msys" to launch the MINGW32 shell:
 
-	msys
+```
+msys
+```
 
 5. From the MINGW32 shell, run "gcc -v":
 
-	gcc -v
+```
+gcc -v
+```
 
 6. The output should be:
 
-	Using built-in specs.
+```
+Using built-in specs.
 COLLECT_GCC=c:\mingw32\bin\gcc.exe
 COLLECT_LTO_WRAPPER=c:/mingw32/bin/../libexec/gcc/i686-w64-mingw32/4.9.2/lto-wrapper.exe
 Target: i686-w64-mingw32
 Configured with: ../../../src/gcc-4.9.2/configure --host=i686-w64-mingw32 --build=i686-w64-mingw32 --target=i686-w64-mingw32 --prefix=/mingw32 --with-sysroot=/c/mingw492/i686-492-posix-dwarf-rt_v3-rev1/mingw32 --with-gxx-include-dir=/mingw32/i686-w64-mingw32/include/c++ --enable-shared --enable-static --disable-multilib --enable-languages=ada,c,c++,fortran,objc,obj-c++,lto --enable-libstdcxx-time=yes --enable-threads=posix --enable-libgomp --enable-libatomic --enable-lto --enable-graphite --enable-checking=release --enable-fully-dynamic-string --enable-version-specific-runtime-libs --disable-sjlj-exceptions --with-dwarf2 --disable-isl-version-check --disable-cloog-version-check --disable-libstdcxx-pch --disable-libstdcxx-debug --enable-bootstrap --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-gnu-as --with-gnu-ld --with-arch=i686 --with-tune=generic --with-libiconv --with-system-zlib --with-gmp=/c/mingw492/prerequisites/i686-w64-mingw32-static --with-mpfr=/c/mingw492/prerequisites/i686-w64-mingw32-static --with-mpc=/c/mingw492/prerequisites/i686-w64-mingw32-static --with-isl=/c/mingw492/prerequisites/i686-w64-mingw32-static --with-cloog=/c/mingw492/prerequisites/i686-w64-mingw32-static --enable-cloog-backend=isl --with-pkgversion='i686-posix-dwarf-rev1, Built by MinGW-W64 project' --with-bugurl=http://sourceforge.net/projects/mingw-w64 CFLAGS='-O2 -pipe -I/c/mingw492/i686-492-posix-dwarf-rt_v3-rev1/mingw32/opt/include -I/c/mingw492/prerequisites/i686-zlib-static/include -I/c/mingw492/prerequisites/i686-w64-mingw32-static/include' CXXFLAGS='-O2 -pipe -I/c/mingw492/i686-492-posix-dwarf-rt_v3-rev1/mingw32/opt/include -I/c/mingw492/prerequisites/i686-zlib-static/include -I/c/mingw492/prerequisites/i686-w64-mingw32-static/include' CPPFLAGS= LDFLAGS='-pipe -L/c/mingw492/i686-492-posix-dwarf-rt_v3-rev1/mingw32/opt/lib -L/c/mingw492/prerequisites/i686-zlib-static/lib -L/c/mingw492/prerequisites/i686-w64-mingw32-static/lib -Wl,--large-address-aware'
 Thread model: posix
 gcc version 4.9.2 (i686-posix-dwarf-rev1, Built by MinGW-W64 project)
-
+```
 
 1.3 Install Git for Windows
 ---------------------------
@@ -110,8 +118,8 @@ gcc version 4.9.2 (i686-posix-dwarf-rev1, Built by MinGW-W64 project)
 2. Run (as Administrator) "nsis-3.02.1-setup.exe", accepting all default values and unselecting "Run NSIS" and "Show release notes" at the end.
 3. Add "C:\Program Files (x86)\NSIS" to the PATH environment variable.  On Windows 7, the path should end up looking something like:
 
-	C:\mingw32\bin;C:\MinGW\msys\1.0;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\Program Files (x86)\NSIS;
-
+```	C:\mingw32\bin;C:\MinGW\msys\1.0;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\Program Files (x86)\NSIS;
+```
 
 2 - Install Maxcoin Dependencies
 ================================
@@ -121,159 +129,216 @@ We'll use "C:\deps" as the folder for all of the required dependencies.
 -----------------------------
 1. From a DOS shell, run "msys" to launch the MINGW32 shell:
 
-	msys
+```
+msys
+```
 
 2. From the MINGW32 shell, create a "C:\deps" folder:
 
-	cd /C
-	mkdir deps
+```
+cd /C
+mkdir deps
+```
 
 3. From the MINGW32 shell, download http://www.openssl.org/source/openssl-1.0.1f.tar.gz to the "C:\deps" folder:
 
-	cd deps
-	wget http://www.openssl.org/source/openssl-1.0.1f.tar.gz --no-check-certificate
+```
+cd deps
+wget http://www.openssl.org/source/openssl-1.0.1f.tar.gz --no-check-certificate
+```
 
 4. From the MINGW32 shell, unpack the "openssl-1.0.1f.tar.gz" source archive with tar (this will avoid symlink issues that you'd otherwise run into with 7Zip or WinRAR):
 
-	tar xvfz openssl-1.0.1f.tar.gz
+```
+tar xvfz openssl-1.0.1f.tar.gz
+```
 
 5. From the MINGW32 shell, configure OpenSSL:
 
-	cd openssl-1.0.1f
-	./config
+```
+cd openssl-1.0.1f
+./config
+```
 
 6. From the MINGW32 shell, build OpenSSL:
 
-	make
-
+```
+make
+```
 
 2.2 - Install Berkeley DB library
 ---------------------------------
 1. From a MINGW32 shell, download http://download.oracle.com/berkeley-db/db-5.1.29.NC.tar.gz to the "C:\deps" folder:
 
-	cd /C/deps
-	wget http://download.oracle.com/berkeley-db/db-5.1.29.NC.tar.gz --no-check-certificate
+```
+cd /C/deps
+wget http://download.oracle.com/berkeley-db/db-5.1.29.NC.tar.gz --no-check-certificate
+```
 
 2. From the MINGW32 shell, unpack the "db-5.1.29.NC.tar.gz" source archive:
 
-	tar xvfz db-5.1.29.NC.tar.gz
+```
+tar xvfz db-5.1.29.NC.tar.gz
+```
 
 3. From the MINGW32 shell, configure Berkeley DB:
 
-	cd db-5.1.29.NC/build_unix
-	../dist/configure --enable-mingw --enable-cxx --disable-shared --disable-replication
+```
+cd db-5.1.29.NC/build_unix
+../dist/configure --enable-mingw --enable-cxx --disable-shared --disable-replication
+```
 
 4. From the MINGW32 shell, build Berkeley DB:
 
-	make
-
+```
+make
+```
 
 2.3 - Install Boost library
 ---------------------------
 1. From a MINGW32 shell, download https://sourceforge.net/projects/boost/files/boost/1.54.0/boost_1_54_0.tar.gz/download to the "C:\deps" folder:
 
-	cd /C/deps
-	wget https://sourceforge.net/projects/boost/files/boost/1.54.0/boost_1_54_0.tar.gz/download --no-check-certificate
+```
+cd /C/deps
+wget https://sourceforge.net/projects/boost/files/boost/1.54.0/boost_1_54_0.tar.gz/download --no-check-certificate
+```
 
 2. From the MINGW32 shell, unpack the "boost_1_54_0.tar.gz" source archive:
 
-	tar xvfz boost_1_54_0.tar.gz
+```
+tar xvfz boost_1_54_0.tar.gz
+```
 
 3. From a DOS shell (run as Administrator), configure Boost:
 
-	cd \deps\boost_1_54_0
-	bootstrap.bat mingw
+```
+cd \deps\boost_1_54_0
+bootstrap.bat mingw
+```
 
 4. From the DOS shell, build Boost:
 
-	b2 --build-type=complete --with-chrono --with-filesystem --with-program_options --with-system --with-thread toolset=gcc variant=release link=static threading=multi runtime-link=static stage
-
+```
+b2 --build-type=complete --with-chrono --with-filesystem --with-program_options --with-system --with-thread toolset=gcc variant=release link=static threading=multi runtime-link=static stage
+```
 
 2.4 - Install Miniupnpc library
 -------------------------------
 1. From a MINGW32 shell, download http://miniupnp.free.fr/files/download.php?file=miniupnpc-1.6.tar.gz to the "C:\deps" folder:
 
-	cd /C/deps
-	wget http://miniupnp.free.fr/files/download.php?file=miniupnpc-1.6.tar.gz --no-check-certificate
+```
+cd /C/deps
+wget http://miniupnp.free.fr/files/download.php?file=miniupnpc-1.6.tar.gz --no-check-certificate
+```
 
 2. From the MINGW32 shell, unpack the "miniupnpc-1.6.tar.gz" source archive:
 
-	tar xvfz miniupnpc-1.6.tar.gz
+```
+tar xvfz miniupnpc-1.6.tar.gz
+```
 
 3. From the MINGW32 shell, build Miniupnpc:
 
-	cd miniupnpc-1.6
-	mingw32-make -f Makefile.mingw init upnpc-static
-	mkdir miniupnpc
-	cp *.h miniupnpc/
-
+```
+cd miniupnpc-1.6
+mingw32-make -f Makefile.mingw init upnpc-static
+mkdir miniupnpc
+cp *.h miniupnpc/
+```
 
 2.5 - Install Libpng and Libqrencode libraries
 ----------------------------------------------
 1. From a MINGW32 shell, download http://prdownloads.sourceforge.net/libpng/libpng-1.2.50.tar.gz to the "C:\deps" folder:
 
-	cd /C/deps
-	wget http://prdownloads.sourceforge.net/libpng/libpng-1.2.50.tar.gz --no-check-certificate
+```
+cd /C/deps
+wget http://prdownloads.sourceforge.net/libpng/libpng-1.2.50.tar.gz --no-check-certificate
+```
 
 2. From the MINGW32 shell, unpack the "libpng-1.2.50.tar.gz" source archive:
 
-	tar xzvf libpng-1.2.50.tar.gz
+```
+tar xzvf libpng-1.2.50.tar.gz
+```
 
 3. From the MINGW32 shell, configure libpng:
 
-	cd libpng-1.2.50
-	configure
+```
+cd libpng-1.2.50
+configure
+```
 
 4. From the MINGW32 shell, build libpng:
 
-	make
+```
+make
+```
 
 5. From the MINGW32 shell, download https://fukuchi.org/works/qrencode/qrencode-3.4.2.tar.gz to the "C:\deps" folder:
 
-	cd /C/deps
-	wget https://fukuchi.org/works/qrencode/qrencode-3.4.2.tar.gz --no-check-certificate
+```
+cd /C/deps
+wget https://fukuchi.org/works/qrencode/qrencode-3.4.2.tar.gz --no-check-certificate
+```
 
 6. From the MINGW32 shell, unpack the "qrencode-3.4.2.tar.gz" source archive:
 
-	tar xzvf qrencode-3.4.2.tar.gz
+```
+tar xzvf qrencode-3.4.2.tar.gz
+```
 
 7. From the MINGW32 shell, configure libqrencode:
 
-	cd qrencode-3.4.2
-	LIBS="../libpng-1.2.50/.libs/libpng12.a ../../mingw32/i686-w64-mingw32/lib/libz.a" png_CFLAGS="-I../libpng-1.2.50" png_LIBS="-L../libpng-1.2.50/.libs" configure --enable-static --disable-shared
+```
+cd qrencode-3.4.2
+LIBS="../libpng-1.2.50/.libs/libpng12.a ../../mingw32/i686-w64-mingw32/lib/libz.a" png_CFLAGS="-I../libpng-1.2.50" png_LIBS="-L../libpng-1.2.50/.libs" configure --enable-static --disable-shared
+```
 
 8. From the MINGW32 shell, build libqrencode:
 
-	make
-
+```
+make
+```
 
 2.6 Install Qt (required only if you need to build maxcoin-qt)
 --------------------------------------------------------------
 1. From a MINGW32 shell, download http://download.qt-project.org/official_releases/qt/4.8/4.8.6/qt-everywhere-opensource-src-4.8.6.tar.gz to the "C:\deps" folder:
 
-	cd /C/deps
-	wget http://download.qt-project.org/official_releases/qt/4.8/4.8.6/qt-everywhere-opensource-src-4.8.6.tar.gz --no-check-certificate
+```
+cd /C/deps
+wget http://download.qt-project.org/official_releases/qt/4.8/4.8.6/qt-everywhere-opensource-src-4.8.6.tar.gz --no-check-certificate
+```
 
 2. From the MINGW32 shell, unpack the "qt-everywhere-opensource-src-4.8.6.tar.gz" source archive:
 
-	tar xzvf qt-everywhere-opensource-src-4.8.6.tar.gz
+```
+tar xzvf qt-everywhere-opensource-src-4.8.6.tar.gz
+```
 
 3. From the MINGW32 shell, for convenience, rename "C:\deps\qt-everywhere-opensource-src-4.8.6" to "C:\deps\qt-4.8.6":
 
-	mv qt-everywhere-opensource-src-4.8.6 qt-4.8.6
+```
+mv qt-everywhere-opensource-src-4.8.6 qt-4.8.6
+```
 
 4. From a DOS shell (run as Aministrator), configure Qt:
 
-	cd \deps\qt-4.8.6
-	configure.exe -release -opensource -confirm-license -static -no-sql-sqlite -no-qt3support -no-opengl -qt-zlib -no-gif -qt-libpng -qt-libmng -no-libtiff -qt-libjpeg -no-dsp -no-vcproj -no-openssl -no-dbus -no-phonon -no-phonon-backend -no-multimedia -no-audio-backend -no-webkit -no-script -no-scripttools -no-declarative -no-declarative-debug -qt-style-windows -qt-style-windowsxp -qt-style-windowsvista -no-style-plastique -no-style-cleanlooks -no-style-motif -no-style-cde -nomake demos -nomake examples -fast -platform win32-g++
+```
+cd \deps\qt-4.8.6
+configure.exe -release -opensource -confirm-license -static -no-sql-sqlite -no-qt3support -no-opengl -qt-zlib -no-gif -qt-libpng -qt-libmng -no-libtiff -qt-libjpeg -no-dsp -no-vcproj -no-openssl -no-dbus -no-phonon -no-phonon-backend -no-multimedia -no-audio-backend -no-webkit -no-script -no-scripttools -no-declarative -no-declarative-debug -qt-style-windows -qt-style-windowsxp -qt-style-windowsvista -no-style-plastique -no-style-cleanlooks -no-style-motif -no-style-cde -nomake demos -nomake examples -fast -platform win32-g++
+```
 
 5. From the DOS shell, build Qt:
 
-	mingw32-make
+```
+mingw32-make
+```
 
 6. Add the path to qmake.exe (C:\deps\qt-4.8.6\bin) to the end of the PATH environment variable.  On Windows 7, the path should end up looking something like:
 
-	C:\mingw32\bin;C:\MinGW\msys\1.0;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\deps\qt-4.8.6\bin
+```	
+C:\mingw32\bin;C:\MinGW\msys\1.0;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\deps\qt-4.8.6\bin
+```
 
 7. Close and reopen any DOS and MINGW32 shells in order to pick up the change to the PATH environment variable.
 
@@ -282,39 +347,51 @@ We'll use "C:\deps" as the folder for all of the required dependencies.
 =================
 1. From a MINGW32 shell, download Maxcoin source code:
 
-	cd /C
-	git clone https://github.com/Max-Coin/maxcoin.git
+```
+cd /C
+git clone https://github.com/Max-Coin/maxcoin.git
+```
 
 2. From the MINGW32 shell, build leveldb:
 
-	cd /C/maxcoin/src
-	make -f makefile.mingw leveldb/libleveldb.a
+```
+cd /C/maxcoin/src
+make -f makefile.mingw leveldb/libleveldb.a
+```
 
 3. From the MINGW32 shell, build cryptopp:
 
-	make -f makefile.mingw cryptopp/libcryptopp.a
+```
+make -f makefile.mingw cryptopp/libcryptopp.a
+```
 
 4. From the MINGW32 shell, create a "obj" directory:
 
-	mkdir obj
+```
+mkdir obj
+```
 
-5. From the MINGW32 shell, build maxcoind:
+5.  From the MINGW32 shell, build maxcoind:
 
-	cd /C/maxcoin/src
-	make -f makefile.mingw
-	strip maxcoind.exe
-
+```
+cd /C/maxcoin/src
+make -f makefile.mingw
+strip maxcoind.exe
+```
 
 4 - Build Maxcoin-qt
 ====================
 1. From a MINGW32 shell, configure Qt make file:
 
-	cd /C/maxcoin
-	../deps/qt-4.8.6/bin/qmake "BOOST_LIB_SUFFIX=-mgw49-mt-s-1_54" "BOOST_INCLUDE_PATH=C:/deps/boost_1_54_0" "BOOST_LIB_PATH=C:/deps/boost_1_54_0/stage/lib" "BDB_INCLUDE_PATH=C:/deps/db-5.1.29.NC/build_unix" "BDB_LIB_PATH=C:/deps/db-5.1.29.NC/build_unix" "OPENSSL_INCLUDE_PATH=C:/deps/openssl-1.0.1f/include" "OPENSSL_LIB_PATH=C:/deps/openssl-1.0.1f" "MINIUPNPC_LIB_SUFFIX=-miniupnpc" "MINIUPNPC_INCLUDE_PATH=C:/deps/miniupnpc-1.6" "MINIUPNPC_LIB_PATH=C:/deps/miniupnpc-1.6" "QRENCODE_INCLUDE_PATH=C:/deps/qrencode-3.4.2" "QRENCODE_LIB_PATH=C:/deps/qrencode-3.4.2/.libs" maxcoin-qt.pro
-
+```
+cd /C/maxcoin
+../deps/qt-4.8.6/bin/qmake "BOOST_LIB_SUFFIX=-mgw49-mt-s-1_54" "BOOST_INCLUDE_PATH=C:/deps/boost_1_54_0" "BOOST_LIB_PATH=C:/deps/boost_1_54_0/stage/lib" "BDB_INCLUDE_PATH=C:/deps/db-5.1.29.NC/build_unix" "BDB_LIB_PATH=C:/deps/db-5.1.29.NC/build_unix" "OPENSSL_INCLUDE_PATH=C:/deps/openssl-1.0.1f/include" "OPENSSL_LIB_PATH=C:/deps/openssl-1.0.1f" "MINIUPNPC_LIB_SUFFIX=-miniupnpc" "MINIUPNPC_INCLUDE_PATH=C:/deps/miniupnpc-1.6" "MINIUPNPC_LIB_PATH=C:/deps/miniupnpc-1.6" "QRENCODE_INCLUDE_PATH=C:/deps/qrencode-3.4.2" "QRENCODE_LIB_PATH=C:/deps/qrencode-3.4.2/.libs" maxcoin-qt.pro
+```
 2. From the MINGW32 shell, build maxcoin-qt:
 
-	mingw32-make -f makefile.Release
+```
+mingw32-make -f makefile.Release
+```
 
 3. "maxcoin-qt.exe" should be created in the "C:\maxcoin\release" folder.
 
@@ -323,7 +400,9 @@ We'll use "C:\deps" as the folder for all of the required dependencies.
 ===================================
 1. From a DOS shell (run as Administrator), run NSIS against maxcoin.msi:
 
+```
 	makensis C:\maxcoin\contrib\installer\maxcoin.nsi
+```
 
 2. "maxcoin-installer.exe" should be created in the "C:\maxcoin\contrib\installer" folder.
 
@@ -339,134 +418,141 @@ The commands used for step #2 (Install Maxcoin Dependencies) and steps 3 - 5 (Bu
 
 1. Create a "maxcoin-deps.sh" folder in "C:\" that contains the following:
 
-	echo
-	echo ******** OPENSSL 1.0.1f - download, configure, make ********
-	echo
-	cd /C
-	mkdir deps
-	cd deps
-	wget http://www.openssl.org/source/openssl-1.0.1f.tar.gz --no-check-certificate
-	tar xvfz openssl-1.0.1f.tar.gz
-	cd openssl-1.0.1f
-	./config
-	make
-	echo
-	echo ******** DB 5.1.29 - download, configure, make ********
-	echo
-	cd /C/deps
-	wget http://download.oracle.com/berkeley-db/db-5.1.29.NC.tar.gz --no-check-certificate
-	tar xvfz db-5.1.29.NC.tar.gz
-	cd db-5.1.29.NC/build_unix
-	../dist/configure --enable-mingw --enable-cxx --disable-shared --disable-replication
-	make
-	echo
-	echo ******** BOOST 1.54.0 - download ********
-	echo
-	cd /C/deps
-	wget https://sourceforge.net/projects/boost/files/boost/1.54.0/boost_1_54_0.tar.gz/download --no-check-certificate
-	tar xvfz boost_1_54_0.tar.gz
-	echo
-	echo ******** MINIUPNPC 1.6 - download, configure, mingw32-make, copy ********
-	echo
-	cd /C/deps
-	wget http://miniupnp.free.fr/files/download.php?file=miniupnpc-1.6.tar.gz --no-check-certificate
-	tar xvfz miniupnpc-1.6.tar.gz
-	cd miniupnpc-1.6
-	mingw32-make -f Makefile.mingw init upnpc-static
-	mkdir miniupnpc
-	cp *.h miniupnpc/
-	echo
-	echo ******** LIBPNG 1.2.50 - download, configure, make ********
-	echo
-	cd /C/deps
-	wget http://prdownloads.sourceforge.net/libpng/libpng-1.2.50.tar.gz --no-check-certificate
-	tar xzvf libpng-1.2.50.tar.gz
-	cd libpng-1.2.50
-	configure
-	make
-	echo
-	echo ******** QRENCODE 3.4.2 - download, configure, make ********
-	echo
-	cd /C/deps
-	wget https://fukuchi.org/works/qrencode/qrencode-3.4.2.tar.gz --no-check-certificate
-	tar xzvf qrencode-3.4.2.tar.gz
-	cd qrencode-3.4.2
-	LIBS="../libpng-1.2.50/.libs/libpng12.a ../../mingw32/i686-w64-mingw32/lib/libz.a" png_CFLAGS="-I../libpng-1.2.50" png_LIBS="-L../libpng-1.2.50/.libs" configure --enable-static --disable-shared
-	make
-	echo
-	echo ******** QT 4.8.6 - download ********
-	echo
-	cd /C/deps
-	wget http://download.qt-project.org/official_releases/qt/4.8/4.8.6/qt-everywhere-opensource-src-4.8.6.tar.gz --no-check-certificate
-	tar xzvf qt-everywhere-opensource-src-4.8.6.tar.gz
-	mv qt-everywhere-opensource-src-4.8.6 qt-4.8.6
-	echo 
-	echo Run \"maxcoin-deps.bat\" from a DOS shell to finish installing the Maxcoin dependencies.
+```
+echo
+echo ******** OPENSSL 1.0.1f - download, configure, make ********
+echo
+cd /C
+mkdir deps
+cd deps
+wget http://www.openssl.org/source/openssl-1.0.1f.tar.gz --no-check-certificate
+tar xvfz openssl-1.0.1f.tar.gz
+cd openssl-1.0.1f
+./config
+make
+echo
+echo ******** DB 5.1.29 - download, configure, make ********
+echo
+cd /C/deps
+wget http://download.oracle.com/berkeley-db/db-5.1.29.NC.tar.gz --no-check-certificate
+tar xvfz db-5.1.29.NC.tar.gz
+cd db-5.1.29.NC/build_unix
+../dist/configure --enable-mingw --enable-cxx --disable-shared --disable-replication
+make
+echo
+echo ******** BOOST 1.54.0 - download ********
+echo
+cd /C/deps
+wget https://sourceforge.net/projects/boost/files/boost/1.54.0/boost_1_54_0.tar.gz/download --no-check-certificate
+tar xvfz boost_1_54_0.tar.gz
+echo
+echo ******** MINIUPNPC 1.6 - download, configure, mingw32-make, copy ********
+echo
+cd /C/deps
+wget http://miniupnp.free.fr/files/download.php?file=miniupnpc-1.6.tar.gz --no-check-certificate
+tar xvfz miniupnpc-1.6.tar.gz
+cd miniupnpc-1.6
+mingw32-make -f Makefile.mingw init upnpc-static
+mkdir miniupnpc
+cp *.h miniupnpc/
+echo
+echo ******** LIBPNG 1.2.50 - download, configure, make ********
+echo
+cd /C/deps
+wget http://prdownloads.sourceforge.net/libpng/libpng-1.2.50.tar.gz --no-check-certificate
+tar xzvf libpng-1.2.50.tar.gz
+cd libpng-1.2.50
+configure
+make
+echo
+echo ******** QRENCODE 3.4.2 - download, configure, make ********
+echo
+cd /C/deps
+wget https://fukuchi.org/works/qrencode/qrencode-3.4.2.tar.gz --no-check-certificate
+tar xzvf qrencode-3.4.2.tar.gz
+cd qrencode-3.4.2
+LIBS="../libpng-1.2.50/.libs/libpng12.a ../../mingw32/i686-w64-mingw32/lib/libz.a" png_CFLAGS="-I../libpng-1.2.50" png_LIBS="-L../libpng-1.2.50/.libs" configure --enable-static --disable-shared
+make
+echo
+echo ******** QT 4.8.6 - download ********
+echo
+cd /C/deps
+wget http://download.qt-project.org/official_releases/qt/4.8/4.8.6/qt-everywhere-opensource-src-4.8.6.tar.gz --no-check-certificate
+tar xzvf qt-everywhere-opensource-src-4.8.6.tar.gz
+mv qt-everywhere-opensource-src-4.8.6 qt-4.8.6
+echo 
+echo Run \"maxcoin-deps.bat\" from a DOS shell to finish installing the Maxcoin dependencies.
+```
 
 2. Create a "maxcoin-deps.bat" in "C:\" that contains the following:
 
-	cd \deps\boost_1_54_0
-	echo.
-	echo ******** BOOST 1.54.0 - bootstrap.bat mingw ********
-	echo.
-	call bootstrap.bat mingw
-	echo.
-	echo ******** BOOST 1.54.0 - b2.exe ********
-	echo.
-	b2.exe --build-type=complete --with-chrono --with-filesystem --with-program_options --with-system --with-thread toolset=gcc variant=release link=static threading=multi runtime-link=static stage
-	cd \deps\qt-4.8.6
-	echo.
-	echo ******** BOOST 1.54.0 - configure ********
-	echo.
-	configure.exe -release -opensource -confirm-license -static -no-sql-sqlite -no-qt3support -no-opengl -qt-zlib -no-gif -qt-libpng -qt-libmng -no-libtiff -qt-libjpeg -no-dsp -no-vcproj -no-openssl -no-dbus -no-phonon -no-phonon-backend -no-multimedia -no-audio-backend -no-webkit -no-script -no-scripttools -no-declarative -no-declarative-debug -qt-style-windows -qt-style-windowsxp -qt-style-windowsvista -no-style-plastique -no-style-cleanlooks -no-style-motif -no-style-cde -nomake demos -nomake examples -fast -platform win32-g++
-	echo.
-	echo ******** BOOST 1.54.0 - mingw32-make ********
-	echo.
-	mingw32-make
+```
+cd \deps\boost_1_54_0
+echo.
+echo ******** BOOST 1.54.0 - bootstrap.bat mingw ********
+echo.
+call bootstrap.bat mingw
+echo.
+echo ******** BOOST 1.54.0 - b2.exe ********
+echo.
+b2.exe --build-type=complete --with-chrono --with-filesystem --with-program_options --with-system --with-thread toolset=gcc variant=release link=static threading=multi runtime-link=static stage
+cd \deps\qt-4.8.6
+echo.
+echo ******** BOOST 1.54.0 - configure ********
+echo.
+configure.exe -release -opensource -confirm-license -static -no-sql-sqlite -no-qt3support -no-opengl -qt-zlib -no-gif -qt-libpng -qt-libmng -no-libtiff -qt-libjpeg -no-dsp -no-vcproj -no-openssl -no-dbus -no-phonon -no-phonon-backend -no-multimedia -no-audio-backend -no-webkit -no-script -no-scripttools -no-declarative -no-declarative-debug -qt-style-windows -qt-style-windowsxp -qt-style-windowsvista -no-style-plastique -no-style-cleanlooks -no-style-motif -no-style-cde -nomake demos -nomake examples -fast -platform win32-g++
+echo.
+echo ******** BOOST 1.54.0 - mingw32-make ********
+echo.
+mingw32-make
+```
 
 3. On an environment where step #1 has already been completed, run "C:\maxcoin-deps.sh" from a MINGW32 shell.  Once that has completed, run "C:\maxcoin-deps.bat" from a DOS shell.  These two scripts should complete all of the actions in step "2 - Install Maxcoin Dependencies".
 
 4. Create a "maxcoin-build.sh" folder in "C:\" that contains the following:
 
-	cd /C
-	echo.
-	echo ******** GIT - Maxcoin ********
-	echo.
-	git clone https://github.com/Max-Coin/maxcoin.git
-	cd /C/maxcoin/src
-	echo.
-	echo ******** LIBLEVELDB - make ********
-	echo
-	make -f makefile.mingw leveldb/libleveldb.a
-	echo
-	echo ******** LIBCRYPTOPP - make ********
-	echo
-	make -f makefile.mingw cryptopp/libcryptopp.a
-	mkdir obj
-	cd /C/maxcoin/src
-	echo
-	echo ******** MAXCOIND - make ********
-	echo
-	make -f makefile.mingw
-	strip maxcoind.exe
-	cd /C/maxcoin
-	echo
-	echo ******** MAXCOIN-QT - qmake ********
-	echo
-	../deps/qt-4.8.6/bin/qmake "BOOST_LIB_SUFFIX=-mgw49-mt-s-1_54" "BOOST_INCLUDE_PATH=C:/deps/boost_1_54_0" "BOOST_LIB_PATH=C:/deps/boost_1_54_0/stage/lib" "BDB_INCLUDE_PATH=C:/deps/db-5.1.29.NC/build_unix" "BDB_LIB_PATH=C:/deps/db-5.1.29.NC/build_unix" "OPENSSL_INCLUDE_PATH=C:/deps/openssl-1.0.1f/include" "OPENSSL_LIB_PATH=C:/deps/openssl-1.0.1f" "MINIUPNPC_LIB_SUFFIX=-miniupnpc" "MINIUPNPC_INCLUDE_PATH=C:/deps/miniupnpc-1.6" "MINIUPNPC_LIB_PATH=C:/deps/miniupnpc-1.6" "QRENCODE_INCLUDE_PATH=C:/deps/qrencode-3.4.2" "QRENCODE_LIB_PATH=C:/deps/qrencode-3.4.2/.libs" maxcoin-qt.pro
-	echo
-	echo ******** MAXCOIN-QT - mingw32-make ********
-	echo
-	mingw32-make -f makefile.Release
-	echo
-	echo Run \"maxcoin-build.bat\" from a DOS shell to finish the build.
+```
+cd /C
+echo.
+echo ******** GIT - Maxcoin ********
+echo.
+git clone https://github.com/Max-Coin/maxcoin.git
+cd /C/maxcoin/src
+echo.
+echo ******** LIBLEVELDB - make ********
+echo
+make -f makefile.mingw leveldb/libleveldb.a
+echo
+echo ******** LIBCRYPTOPP - make ********
+echo
+make -f makefile.mingw cryptopp/libcryptopp.a
+mkdir obj
+cd /C/maxcoin/src
+echo
+echo ******** MAXCOIND - make ********
+echo
+make -f makefile.mingw
+strip maxcoind.exe
+cd /C/maxcoin
+echo
+echo ******** MAXCOIN-QT - qmake ********
+echo
+../deps/qt-4.8.6/bin/qmake "BOOST_LIB_SUFFIX=-mgw49-mt-s-1_54" "BOOST_INCLUDE_PATH=C:/deps/boost_1_54_0" "BOOST_LIB_PATH=C:/deps/boost_1_54_0/stage/lib" "BDB_INCLUDE_PATH=C:/deps/db-5.1.29.NC/build_unix" "BDB_LIB_PATH=C:/deps/db-5.1.29.NC/build_unix" "OPENSSL_INCLUDE_PATH=C:/deps/openssl-1.0.1f/include" "OPENSSL_LIB_PATH=C:/deps/openssl-1.0.1f" "MINIUPNPC_LIB_SUFFIX=-miniupnpc" "MINIUPNPC_INCLUDE_PATH=C:/deps/miniupnpc-1.6" "MINIUPNPC_LIB_PATH=C:/deps/miniupnpc-1.6" "QRENCODE_INCLUDE_PATH=C:/deps/qrencode-3.4.2" "QRENCODE_LIB_PATH=C:/deps/qrencode-3.4.2/.libs" maxcoin-qt.pro
+echo
+echo ******** MAXCOIN-QT - mingw32-make ********
+echo
+mingw32-make -f makefile.Release
+echo
+echo Run \"maxcoin-build.bat\" from a DOS shell to finish the build.
+```
 
 5. Create a "maxcoin-build.bat" folder in "C:\" that contains the following:
 
-	echo.
-	echo ******** MAXCOIN-QT INSTALLER - makensis ********
-	echo.
-	makensis C:\maxcoin\contrib\installer\maxcoin.nsi
+```
+echo.
+echo ******** MAXCOIN-QT INSTALLER - makensis ********
+echo.
+makensis C:\maxcoin\contrib\installer\maxcoin.nsi
+```
 
 6. On an environment where step #2 has already been completed, run "C:\maxcoin-build.sh" from a MINGW32 shell.  Once that has completed, run "C:\maxcoin-build.bat" from a DOS shell.  These two scripts should complete all of the actions in steps "3 - Build Maxcoin", "4 - Build Maxcoin-qt", and "5 - Build Maxcoin Windows Installer".
-
