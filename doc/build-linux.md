@@ -42,3 +42,32 @@ Then, to build the GUI, run the following commands:
 cd ..
 qmake maxcoin-qt.pro
 make
+```
+
+
+Automation
+==========
+The commands used above can be automated with a single bash script as follows:
+
+1. Create a "maxcoin-build.sh" file in the home folder (`cd ~`) that contains the following:
+
+```
+sudo apt-get update
+sudo apt-get install -y git-core build-essential libssl-dev libboost-all-dev libdb-dev libdb++-dev libminiupnpc-dev libqrencode-dev libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools qt-sdk
+cd ~
+git clone https://github.com/Max-Coin/MaxCoin.git
+cd MaxCoin/src
+make -f makefile.unix
+strip maxcoind
+cd ..
+qmake maxcoin-qt.pro
+make
+```
+2. Run the new maxcoin-build.sh file:
+
+```
+cd ~
+sudo ./maxcoin-build.sh
+```
+
+3. After the script finishes, ~/maxcoin/src/maxcoind and ~/maxcoin/release/maxcoin-qt should be built and ready for use.  That's it!
