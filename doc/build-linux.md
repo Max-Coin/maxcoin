@@ -63,11 +63,19 @@ cd ..
 qmake maxcoin-qt.pro
 make
 ```
-2. Run the new maxcoin-build.sh file:
+
+2.  Grant "execute" permissions to the maxcoin-build.sh file:
+
+```
+cd ~
+chmod ugo+wrx maxcoin-build.sh
+```
+
+3. Run the new maxcoin-build.sh file:
 
 ```
 cd ~
 sudo ./maxcoin-build.sh
 ```
 
-3. After the script finishes, ~/maxcoin/src/maxcoind and ~/maxcoin/release/maxcoin-qt should be built and ready for use.  That's it!
+4. After the script finishes, ~/maxcoin/src/maxcoind and ~/maxcoin/release/maxcoin-qt should be built and ready for use.  That's it!
