@@ -1,67 +1,63 @@
 Building on Linux
-===============
+=================
+
+NOTE: These instructions have been tested and verified on Ubuntu 14.04.5 (32 and 64 bit) and 16.04.3 (32 and 64 bit).  Instructions for building on other Ubuntu versions and other Linux platforms still need further testing.
 
 To install the required dependencies, run the following command from Ubuntu:
 
-$ sudo apt-get install git-core build-essential libssl-dev libboost-all-dev libdb5.1-dev libdb5.1++-dev libgtk2.0-dev libminiupnpc-dev qt4-qmake mingw32 synaptic qt-sdk qt4-dev-tools libqt4-dev libqt4-core libqt4-gui miniupnpc
+```
+sudo apt-get update
+sudo apt-get install -y git-core build-essential libssl-dev libboost-all-dev libdb-dev libdb++-dev libminiupnpc-dev libqrencode-dev libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools qt-sdk
+```
 
-or the following command from Debian:
+Then grab the latest version of the MaxCoin source code from Github:
 
-$ sudo apt-get install git-core build-essential libssl-dev libboost-all-dev libdb-dev libdb4.8++-dev libgtk2.0-dev qt4-qmake mingw32 synaptic qt-sdk qt4-dev-tools libqt4-dev libqt4-core libqt4-gui libdb4.8++-dev
+```
+cd ~
+git clone https://github.com/Max-Coin/MaxCoin.git
+cd MaxCoin/src
+```
 
-Then grab the latest version of the MaxCoin source code from Github
+**UBUNTU 16.04.3 ONLY (32 & 64 BIT)**
 
-$ git clone https://github.com/Max-Coin/MaxCoin.git
+If building on Ubuntu 16.04.3, a revision is required to rpcrawtransaction.cpp to make it compatible with the version of the default Boost library version used by 16.04 (further details are available at https://bitcointalk.org/index.php?topic=1312757.0 and https://github.com/bitcoin/bitcoin/pull/6114/files).  THIS IS NOT NEEDED ON UBUNTU 14.04.5:
 
-To build the daemon, run the following commands
+```
+sed -i 's/<const\ CScriptID\&/<CScriptID/' rpcrawtransaction.cpp
+```
 
-$ cd MaxCoin/src
+**UBUNTU 16.04.3 32-BIT ONLY**
 
-$ make -f makefile.unix
+If building on Ubuntu 16.04.3 32-bit, modify MaxCoin/src/makefile.unix to set path for libminiupnpc.a from "/usr/lib/libminiupnpc.a" to "/usr/lib/i386-linux-gnu/libminiupnpc.a".  THIS IS NOT NEEDED ON UBUNTU 14.04.5:
 
-Optionally, debugging symbols can be removed from the binary to reduce it's size. This can be done using strip.
+```
+sed -i 's/\/usr\/lib\/libminiupnpc.a/\/usr\/lib\/i386-linux-gnu\/libminiupnpc.a/' makefile.unix
+```
 
-$ strip maxcoind
+**UBUNTU 16.04.3 64-BIT ONLY**
+
+If building on Ubuntu 16.04.3 64-bit, modify MaxCoin/src/makefile.unix to set path for libminiupnpc.a from "/usr/lib/libminiupnpc.a" to "/usr/lib/x86_64-linux-gnu/libminiupnpc.a".  THIS IS NOT NEEDED ON UBUNTU 14.04.5:
+
+```
+sed -i 's/\/usr\/lib\/libminiupnpc.a/\/usr\/lib\/x86_64-linux-gnu\/libminiupnpc.a/' makefile.unix
+```
+
+To build the daemon, run the following command:
+
+```
+make -f makefile.unix
+```
+
+Optionally, debugging symbols can be removed from the binary to reduce its size. This can be done using strip:
+
+```
+strip maxcoind
+```
 
 Then, to build the GUI, run the following commands:
 
-$ cd ..
-
-$ qmake
-
-$ make
-
-Troubleshooting:
--------------
-
-Building miniupnpc
-----------------
-
-If your OS doesn't support libminiupnpc, you can build this manually by performing the following steps:
-
-Don't use miniupnpc-1.6 as its broken an qmake compilation will fail to build Maxcoin-QT.
-
-$ wget 'http://miniupnp.free.fr/files/download.php?file=miniupnpc-1.5.tar.gz' -O miniupnpc-1.5.tar.gz
-
-$ tar -xzvf miniupnpc-1.5.tar.gz
-
-$ cd miniupnpc-1.5
-	
-$ make
-
-$	make install
-
-Cleaning the build:
-----------------=
-
-If you have to clean your build environment you may have to rebuild LevelDB manually. This can be done using:
-
-$ cd src/leveldb
-
-$ chmod +x build_detect_platform
-
-$ ./build_detect_platform
-
-Ignore the usage errors (it still builds the relevent file) and now run:
-
-$ make libleveldb.a libmemenv.a
+```
+cd ..
+qmake maxcoin-qt.pro
+make
+```
