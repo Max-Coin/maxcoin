@@ -418,7 +418,7 @@ Automation
 ==========
 The commands used for step #2 (Install Maxcoin Dependencies) and steps 3 - 5 (Build maxcoind, maxcoin-qt, and maxcoin-installer.exe) can be automated through MINGW32 bash and DOS bat files.  Those commands and suggested file organization is listed below:
 
-1. Create a "maxcoin-deps.sh" folder in "C:\\" that contains the following:
+1. Create a "maxcoin-deps.sh" file in "C:\\" that contains the following:
 
 ```
 echo
@@ -511,7 +511,7 @@ mingw32-make
 
 3. On an environment where step #1 has already been completed, run "C:\maxcoin-deps.sh" from a MINGW32 shell.  Once that has completed, run "C:\maxcoin-deps.bat" from a DOS shell.  These two scripts should complete all of the actions in step "2 - Install Maxcoin Dependencies".
 
-4. Create a "maxcoin-build.sh" folder in "C:\\" that contains the following:
+4. Create a "maxcoin-build.sh" file in "C:\\" that contains the following:
 
 ```
 cd /C
@@ -548,7 +548,7 @@ echo
 echo Run \"maxcoin-build.bat\" from a DOS shell to finish the build.
 ```
 
-5. Create a "maxcoin-build.bat" folder in "C:\\" that contains the following:
+5. Create a "maxcoin-build.bat" file in "C:\\" that contains the following:
 
 ```
 echo.
