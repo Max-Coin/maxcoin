@@ -114,11 +114,13 @@ gcc version 4.9.2 (i686-posix-dwarf-rev1, Built by MinGW-W64 project)
 3. Accept default values at every step of the installation and unselecting "View Release Notes" at the end.
 
 1.4 - Install NullSoft Scriptable Install System (if building Maxcoin installer for Windows)
+--------------------------------------------------------------------------------------------
 1. Download http://prdownloads.sourceforge.net/nsis/nsis-3.02.1-setup.exe?download
 2. Run (as Administrator) "nsis-3.02.1-setup.exe", accepting all default values and unselecting "Run NSIS" and "Show release notes" at the end.
 3. Add "C:\Program Files (x86)\NSIS" to the PATH environment variable.  On Windows 7, the path should end up looking something like:
 
-```	C:\mingw32\bin;C:\MinGW\msys\1.0;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\Program Files (x86)\NSIS;
+```
+C:\mingw32\bin;C:\MinGW\msys\1.0;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\Program Files (x86)\NSIS
 ```
 
 2 - Install Maxcoin Dependencies
