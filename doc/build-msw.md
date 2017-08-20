@@ -403,7 +403,7 @@ mingw32-make -f makefile.Release
 1. From a DOS shell (run as Administrator), run NSIS against maxcoin.msi:
 
 ```
-	makensis C:\maxcoin\contrib\installer\maxcoin.nsi
+makensis C:\maxcoin\contrib\installer\maxcoin.nsi
 ```
 
 2. "maxcoin-installer.exe" should be created in the "C:\maxcoin\contrib\installer" folder.
@@ -509,9 +509,23 @@ echo.
 mingw32-make
 ```
 
-3. On an environment where step #1 has already been completed, run "C:\maxcoin-deps.sh" from a MINGW32 shell.  Once that has completed, run "C:\maxcoin-deps.bat" from a DOS shell.  These two scripts should complete all of the actions in step "2 - Install Maxcoin Dependencies".
+3. On an environment where step #1 has already been completed, run "C:\maxcoin-deps.sh" from a MINGW32 shell:
 
-4. Create a "maxcoin-build.sh" file in "C:\\" that contains the following:
+```
+cd /C
+./maxcoin-deps.sh
+```
+
+4. Once maxcoin-deps.sh has completed, run "C:\maxcoin-deps.bat" from a DOS shell:
+
+```
+cd C:\
+maxcoin-deps.bat
+```
+
+5. The two scripts above complete all of the actions in step "2 - Install Maxcoin Dependencies".
+
+6. Create a "maxcoin-build.sh" file in "C:\\" that contains the following:
 
 ```
 cd /C
@@ -548,7 +562,7 @@ echo
 echo Run \"maxcoin-build.bat\" from a DOS shell to finish the build.
 ```
 
-5. Create a "maxcoin-build.bat" file in "C:\\" that contains the following:
+7. Create a "maxcoin-build.bat" file in "C:\\" that contains the following:
 
 ```
 echo.
@@ -557,4 +571,18 @@ echo.
 makensis C:\maxcoin\contrib\installer\maxcoin.nsi
 ```
 
-6. On an environment where step #2 has already been completed, run "C:\maxcoin-build.sh" from a MINGW32 shell.  Once that has completed, run "C:\maxcoin-build.bat" from a DOS shell.  These two scripts should complete all of the actions in steps "3 - Build Maxcoin", "4 - Build Maxcoin-qt", and "5 - Build Maxcoin Windows Installer".
+8. On an environment where step #2 has already been completed, run "C:\maxcoin-build.sh" from a MINGW32 shell:
+
+```
+cd /C
+./maxcoin-build.sh
+```
+
+9. Once maxcoin-build.sh has completed, run "C:\maxcoin-build.bat" from a DOS shell:
+
+```
+cd C:\
+maxcoin-build.bat
+```
+
+10. The two scripts above complete all of the actions in steps "3 - Build Maxcoin", "4 - Build Maxcoin-qt", and "5 - Build Maxcoin Windows Installer".  That's it!
