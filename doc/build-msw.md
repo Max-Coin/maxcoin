@@ -11,9 +11,9 @@ WINDOWS BUILD NOTES
 
 Dependencies
 ------------
-Libraries you need to download separately and build:
+Libraries that will be used:
 
-	name            default path              download
+	Name            Default Path              Source
 	---------------------------------------------------------------------------------------------------------------------------
 	OpenSSL         \deps\openssl-1.0.1f      http://www.openssl.org/source
 	Berkeley DB     \deps\db-5.1.29.NC        http://www.oracle.com/technetwork/products/berkeleydb/downloads/index-082944.html
@@ -73,8 +73,8 @@ NOTE: These instructions were developed and tested on Windows 7 Professional (64
 C:\MinGW\msys\1.0;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\
 ```
 
-1.2 Install MinGW Toolchain
----------------------------
+1.2 - Install MinGW Toolchain
+-----------------------------
 1. Download http://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/4.9.2/threads-posix/dwarf/i686-4.9.2-release-posix-dwarf-rt_v3-rev1.7z/download
 2. Using 7Zip, unpack the "i686-4.9.2-release-posix-dwarf-rt_v3-rev1.7z" source archive to "C:\".
 3. Add "C:\mingw32\bin" to the PATH environment variable.  On Windows 7, the path should end up looking something like:
@@ -107,8 +107,8 @@ Thread model: posix
 gcc version 4.9.2 (i686-posix-dwarf-rev1, Built by MinGW-W64 project)
 ```
 
-1.3 Install Git for Windows
----------------------------
+1.3 - Install Git for Windows
+-----------------------------
 1. Download https://git-scm.com/download/win
 2. Run (as Administrator) the downloaded Git installer (which, at the time of this writing is "Git-2.13.3-64-bit.exe").
 3. Accept default values at every step of the installation and unselecting "View Release Notes" at the end.
@@ -125,7 +125,7 @@ gcc version 4.9.2 (i686-posix-dwarf-rev1, Built by MinGW-W64 project)
 ================================
 We'll use "C:\deps" as the folder for all of the required dependencies.
 
-2.1 - Install OpenSSL library
+2.1 - Install OpenSSL Library
 -----------------------------
 1. From a DOS shell, run "msys" to launch the MINGW32 shell:
 
@@ -166,7 +166,7 @@ cd openssl-1.0.1f
 make
 ```
 
-2.2 - Install Berkeley DB library
+2.2 - Install Berkeley DB Library
 ---------------------------------
 1. From a MINGW32 shell, download http://download.oracle.com/berkeley-db/db-5.1.29.NC.tar.gz to the "C:\deps" folder:
 
@@ -194,7 +194,7 @@ cd db-5.1.29.NC/build_unix
 make
 ```
 
-2.3 - Install Boost library
+2.3 - Install Boost Library
 ---------------------------
 1. From a MINGW32 shell, download https://sourceforge.net/projects/boost/files/boost/1.54.0/boost_1_54_0.tar.gz/download to the "C:\deps" folder:
 
@@ -222,7 +222,7 @@ bootstrap.bat mingw
 b2 --build-type=complete --with-chrono --with-filesystem --with-program_options --with-system --with-thread toolset=gcc variant=release link=static threading=multi runtime-link=static stage
 ```
 
-2.4 - Install Miniupnpc library
+2.4 - Install Miniupnpc Library
 -------------------------------
 1. From a MINGW32 shell, download http://miniupnp.free.fr/files/download.php?file=miniupnpc-1.6.tar.gz to the "C:\deps" folder:
 
@@ -246,7 +246,7 @@ mkdir miniupnpc
 cp *.h miniupnpc/
 ```
 
-2.5 - Install Libpng and Libqrencode libraries
+2.5 - Install Libpng and Libqrencode Libraries
 ----------------------------------------------
 1. From a MINGW32 shell, download http://prdownloads.sourceforge.net/libpng/libpng-1.2.50.tar.gz to the "C:\deps" folder:
 
@@ -300,8 +300,8 @@ LIBS="../libpng-1.2.50/.libs/libpng12.a ../../mingw32/i686-w64-mingw32/lib/libz.
 make
 ```
 
-2.6 Install Qt (required only if you need to build maxcoin-qt)
---------------------------------------------------------------
+2.6 - Install Qt (required only if you need to build maxcoin-qt)
+----------------------------------------------------------------
 1. From a MINGW32 shell, download http://download.qt-project.org/official_releases/qt/4.8/4.8.6/qt-everywhere-opensource-src-4.8.6.tar.gz to the "C:\deps" folder:
 
 ```
@@ -409,14 +409,14 @@ mingw32-make -f makefile.Release
 
 6 - Celebrate!
 ==============
-After completing steps 1 - 5, MaxCoin/src/maxcoind.exe, MaxCoin/maxcoin-qt.exe, and Maxcoin/contrib/installer/maxcoin-installer.exe should be built and ready for use.  That's it!
+After completing steps 1 - 5, C:\maxcoin\src\maxcoind.exe, C:\maxcoin\release\maxcoin-qt.exe, and C:\maxcoin\contrib\installer\maxcoin-installer.exe should be built and ready for use.  That's it!
 
 
 Automation
 ==========
 The commands used for step #2 (Install Maxcoin Dependencies) and steps 3 - 5 (Build maxcoind, maxcoin-qt, and maxcoin-installer.exe) can be automated through MINGW32 bash and DOS bat files.  Those commands and suggested file organization is listed below:
 
-1. Create a "maxcoin-deps.sh" folder in "C:\" that contains the following:
+1. Create a "maxcoin-deps.sh" folder in "C:\\" that contains the following:
 
 ```
 echo
@@ -484,7 +484,7 @@ echo
 echo Run \"maxcoin-deps.bat\" from a DOS shell to finish installing the Maxcoin dependencies.
 ```
 
-2. Create a "maxcoin-deps.bat" in "C:\" that contains the following:
+2. Create a "maxcoin-deps.bat" in "C:\\" that contains the following:
 
 ```
 cd \deps\boost_1_54_0
@@ -509,7 +509,7 @@ mingw32-make
 
 3. On an environment where step #1 has already been completed, run "C:\maxcoin-deps.sh" from a MINGW32 shell.  Once that has completed, run "C:\maxcoin-deps.bat" from a DOS shell.  These two scripts should complete all of the actions in step "2 - Install Maxcoin Dependencies".
 
-4. Create a "maxcoin-build.sh" folder in "C:\" that contains the following:
+4. Create a "maxcoin-build.sh" folder in "C:\\" that contains the following:
 
 ```
 cd /C
@@ -546,7 +546,7 @@ echo
 echo Run \"maxcoin-build.bat\" from a DOS shell to finish the build.
 ```
 
-5. Create a "maxcoin-build.bat" folder in "C:\" that contains the following:
+5. Create a "maxcoin-build.bat" folder in "C:\\" that contains the following:
 
 ```
 echo.
