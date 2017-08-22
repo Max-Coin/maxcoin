@@ -111,13 +111,14 @@ gcc version 4.9.2 (i686-posix-dwarf-rev1, Built by MinGW-W64 project)
 -----------------------------
 1. Download https://git-scm.com/download/win
 2. Run (as Administrator) the downloaded Git installer (which, at the time of this writing is "Git-2.13.3-64-bit.exe").
-3. Accept default values at every step of the installation and unselecting "View Release Notes" at the end.
+3. Accept default values at every step of the installation and unselect "View Release Notes" at the end.
 
 1.4 - Install NullSoft Scriptable Install System (required only if you need to build Maxcoin installer for Windows)
 -------------------------------------------------------------------------------------------------------------------
 1. Download http://prdownloads.sourceforge.net/nsis/nsis-3.02.1-setup.exe?download
-2. Run (as Administrator) "nsis-3.02.1-setup.exe", accepting all default values and unselecting "Run NSIS" and "Show release notes" at the end.
-3. Add "C:\Program Files (x86)\NSIS" to the PATH environment variable.  On Windows 7, the path should end up looking something like:
+2. Run (as Administrator) "nsis-3.02.1-setup.exe".
+3. Accept default values at every step of the installation and unselect "Run NSIS" and "Show release notes" at the end.
+4. Add "C:\Program Files (x86)\NSIS" to the PATH environment variable.  On Windows 7, the path should end up looking something like:
 
 ```
 C:\mingw32\bin;C:\MinGW\msys\1.0;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\Program Files (x86)\NSIS
@@ -339,7 +340,7 @@ mingw32-make
 6. Add the path to qmake.exe (C:\deps\qt-4.8.6\bin) to the end of the PATH environment variable.  On Windows 7, the path should end up looking something like:
 
 ```	
-C:\mingw32\bin;C:\MinGW\msys\1.0;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\deps\qt-4.8.6\bin
+C:\mingw32\bin;C:\MinGW\msys\1.0;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\Program Files (x86)\NSIS;C:\deps\qt-4.8.6\bin
 ```
 
 7. Close and reopen any DOS and MINGW32 shells in order to pick up the change to the PATH environment variable.
