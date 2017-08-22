@@ -21,23 +21,23 @@ USE_UPNP:=-
 USE_IPV6:=1
 
 DEPSDIR?=/usr/local
-BOOST_SUFFIX?=-mgw48-mt-s-1_55
+BOOST_SUFFIX?=-mgw49-mt-s-1_54
 
 INCLUDEPATHS= \
  -I"$(CURDIR)" \
  -I"$(DEPSDIR)/include" \
- -I"c:/deps/boost_1_55_0" \
- -I"c:/deps/db-4.8.30.NC/build_unix" \
- -I"c:/deps/miniupnpc-1.8" \
+ -I"c:/deps/boost_1_54_0" \
+ -I"c:/deps/db-5.1.29.NC/build_unix" \
+ -I"c:/deps/miniupnpc-1.6" \
  -I"c:/deps/openssl-1.0.1f/include"
 
 LIBPATHS= \
  -L"$(CURDIR)/leveldb" \
  -L"$(CURDIR)/cryptopp" \
  -L"$(DEPSDIR)/lib" \
- -L"c:/deps/boost_1_55_0/stage/lib" \
- -L"c:/deps/db-4.8.30.NC/build_unix" \
- -L"c:/deps/miniupnpc-1.8" \
+ -L"c:/deps/boost_1_54_0/stage/lib" \
+ -L"c:/deps/db-5.1.29.NC/build_unix" \
+ -L"c:/deps/miniupnpc-1.6" \
  -L"c:/deps/openssl-1.0.1f"
 
 LIBS= \
