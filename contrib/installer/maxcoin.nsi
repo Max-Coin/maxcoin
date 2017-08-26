@@ -12,13 +12,13 @@
 # version
 !define VERSIONMAJOR 0
 !define VERSIONMINOR 9
-!define VERSIONBUILD 3
-!define VERSIONINCRM 1
+!define VERSIONBUILD 4
+!define VERSIONINCRM 0
 
 # These will be displayed by the "Click here for support information" link in "Add/Remove Programs"
-!define HELPURL "http://maxcoin.co.uk" # "Support Information" link
-!define UPDATEURL "http://maxcoin.co.uk" # "Product Updates" link
-!define ABOUTURL "http://maxcoin.co.uk" # "Publisher" link
+!define HELPURL "http://maxcoin.org.uk" # "Support Information" link
+!define UPDATEURL "http://maxcoin.org.uk" # "Product Updates" link
+!define ABOUTURL "http://maxcoin.org.uk" # "Publisher" link
 # This is the size (in kB) of all the files copied into "Program Files"
 !define INSTALLSIZE 29347
  
