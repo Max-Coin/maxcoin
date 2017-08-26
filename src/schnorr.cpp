@@ -1,4 +1,4 @@
-// Copyright (c) 2014 MaxCoin Developers and Nigel Smart
+// Copyright (c) 2017 MaxCoin Developers and Nigel Smart
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include "cryptopp/sha3.h"

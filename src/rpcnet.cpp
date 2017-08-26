@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2012 Bitcoin Developers
-// Copyright (c) 2014 MaxCoin developers
+// Copyright (c) 2017 MaxCoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
