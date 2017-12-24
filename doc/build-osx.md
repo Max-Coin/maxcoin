@@ -81,11 +81,13 @@ Installing the dependencies using MacPorts is very straightforward.
         make libmemenv.a
 
 2. Complile the cryptopp library
+
         cd ../cryptopp
         make dynamic static
         make
 
 2.  Build maxcoind:
+
         cd ..
         make -f makefile.osx
 
@@ -122,9 +124,8 @@ Once dependencies are compiled, creating `MaxCoin-Qt.app` is easy:
     make -f Makefile RELEASE=1
 
 To create a dmg file
+
      contrib/macdeploy/macdeployqtplus MaxCoin-QT.app -add-qt-tr de,es,ru -dmg -fancy contrib/macdeploy/fancy.plist
-
-
 
 Note: 
 As of December 2012, the `boost` port does not obey `macosx_deployment_target`.
