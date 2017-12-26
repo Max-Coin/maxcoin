@@ -323,7 +323,7 @@ void BitcoinGUI::createToolBars()
     toolbar->addAction(receiveCoinsAction);
     toolbar->addAction(historyAction);
     toolbar->addAction(addressBookAction);
-    toolbar->addAction(miningAction);
+    //toolbar->addAction(miningAction);
 }
 
 void BitcoinGUI::setClientModel(ClientModel *clientModel)

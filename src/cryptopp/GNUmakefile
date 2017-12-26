@@ -1,7 +1,7 @@
 CXXFLAGS = -DNDEBUG -g -O2 -Wno-unused-variable -Wno-unused-function -Wno-extra -Wno-type-limits
 # -O3 fails to link on Cygwin GCC version 4.5.3
 # -fPIC is supported. Please report any breakage of -fPIC as a bug.
-# CXXFLAGS += -fPIC
+  CXXFLAGS += -fPIC
 # the following options reduce code size, but breaks link or makes link very slow on some systems
 # CXXFLAGS += -ffunction-sections -fdata-sections
 # LDFLAGS += -Wl,--gc-sections

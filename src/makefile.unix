@@ -51,7 +51,7 @@ ifndef USE_UPNP
 	override USE_UPNP = -
 endif
 ifneq (${USE_UPNP}, -)
-	LIBS += /usr/lib/libminiupnpc.a
+	LIBS += /usr/lib/x86_64-linux-gnu/libminiupnpc.a
 	DEFS += -DUSE_UPNP=$(USE_UPNP)
 endif
 
