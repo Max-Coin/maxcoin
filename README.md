@@ -15,6 +15,7 @@ Technical Information
 Notable differences from Bitcoin
 -----------------------------
 
++ sha3 Keccak encryption instead of sha256
 + replacement of ECDSA with Schnorr signing (Schnorr Signatures)
 + use of secp256r1 curve over secp256k1
 + requirement for public key when verifying transactions
