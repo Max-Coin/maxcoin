@@ -101,7 +101,7 @@ uint256 CAlert::GetHash() const
 
 bool CAlert::IsInEffect() const
 {
-    return (GetAdjustedTime() < nExpiration);
+    return false;
 }
 
 bool CAlert::Cancels(const CAlert& alert) const
@@ -113,32 +113,16 @@ bool CAlert::Cancels(const CAlert& alert) const
 
 bool CAlert::AppliesTo(int nVersion, std::string strSubVerIn) const
 {
-    // TODO: rework for client-version-embedded-in-strSubVer ?
-    return (IsInEffect() &&
-            nMinVer <= nVersion && nVersion <= nMaxVer &&
-            (setSubVer.empty() || setSubVer.count(strSubVerIn)));
+    return false;
 }
 
 bool CAlert::AppliesToMe() const
 {
-    return AppliesTo(PROTOCOL_VERSION, FormatSubVersion(CLIENT_NAME, CLIENT_VERSION, std::vector<std::string>()));
+    return false;
 }
 
 bool CAlert::RelayTo(CNode* pnode) const
 {
-    if (!IsInEffect())
-        return false;
-    // returns true if wasn't already contained in the set
-    if (pnode->setKnown.insert(GetHash()).second)
-    {
-        if (AppliesTo(pnode->nVersion, pnode->strSubVer) ||
-            AppliesToMe() ||
-            GetAdjustedTime() < nRelayUntil)
-        {
-            pnode->PushMessage("alert", *this);
-            return true;
-        }
-    }
     return false;
 }
 
