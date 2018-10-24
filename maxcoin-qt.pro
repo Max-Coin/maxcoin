@@ -10,6 +10,10 @@ CONFIG += thread
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x000000
 
+
+#QMAKE_CXXFLAGS_WARN_OFF = -Wno-reserved-user-defined-literal
+QMAKE_CXXFLAGS += -Wno-reserved-user-defined-literal
+
 # for boost 1.37, add -mt to the boost libraries
 # use: qmake BOOST_LIB_SUFFIX=-mt
 # for boost thread win32 with _win32 sufix
@@ -35,6 +39,13 @@ DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x000000
 #MINIUPNPC_LIB_PATH=C:/deps/miniupnpc-1.6
 #QRENCODE_INCLUDE_PATH=C:/deps/qrencode-3.4.2
 #QRENCODE_LIB_PATH=C:/deps/qrencode-3.4.2/.libs
+BOOST_LIB_SUFFIX=-mt
+BOOST_INCLUDE_PATH=/usr/local/opt/boost@1.59/include
+BOOST_LIB_PATH=/usr/local/opt/boost@1.59/lib
+OPENSSL_INCLUDE_PATH=/usr/local/opt/openssl/include
+OPENSSL_LIB_PATH=/usr/local/opt/openssl/lib
+MINIUPNPC_INCLUDE_PATH=/usr/local/opt/miniupnpc/include
+MINIUPNPC_LIB_PATH=/usr/local/opt/miniupnpc/lib
 
 OBJECTS_DIR = build
 MOC_DIR = build
