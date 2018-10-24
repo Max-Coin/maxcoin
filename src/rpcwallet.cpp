@@ -712,7 +712,7 @@ static CScript _createmultisig(const Array& params)
             strprintf("not enough keys supplied "
                       "(got %"PRIszu" keys, but need at least %d to redeem)", keys.size(), nRequired));
     std::vector<CKey> pubkeys;
-    // pubkeys.resize(keys.size());
+    pubkeys.resize(keys.size());
     for (unsigned int i = 0; i < keys.size(); i++)
     {
         const std::string& ks = keys[i].get_str();
@@ -729,17 +729,8 @@ static CScript _createmultisig(const Array& params)
             if (!pwalletMain->GetPubKey(keyID, vchPubKey))
                 throw runtime_error(
                     strprintf("no full public key for address %s",ks.c_str()));
-
-            CPubKey pubKey = CPubKey(vchPubKey);
-            if (!pubKey.IsValid())
+            if (!vchPubKey.IsValid() || !pubkeys[i].SetPubKey(vchPubKey))
                 throw runtime_error(" Invalid public key: "+ks);
-
-            CKey key;
-            if (!key.SetPubKey(pubKey))
-                throw runtime_error(" Could not set public key: "+ks);   
-
-            // pubkeys[i] = key;
-            pubkeys.push_back(key);
         }
 
         // Case 2: hex public key
@@ -750,18 +741,6 @@ static CScript _createmultisig(const Array& params)
 
             if (!pubKey.IsValid())
                 throw runtime_error(" Invalid public key: "+ks);
-
-            CKey key;
-            if (!key.SetPubKey(pubKey))
-                throw runtime_error(" Could not set public key: "+ks);
-
-            // pubkeys[i] = key;
-            pubkeys.push_back(key);
-
-            CPubKey pubKey2 = key.GetPubKey();
-            CKey key2 = pubkeys[i];
-            CPubKey pubKey3 = key2.GetPubKey();
-            CPubKey pubKey4 = pubkeys[i].GetPubKey();
         }
         else
         {
