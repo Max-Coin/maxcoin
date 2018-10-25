@@ -7,20 +7,32 @@
 # Originally by Laszlo Hanyecz (solar@heliacal.net)
 
 CXX=llvm-g++
-DEPSDIR=/opt/local
+#DEPSDIR=/opt/local
+DEPSDIR=
+BOOST_INCLUDE_PATH=/usr/local/opt/boost@1.60/include
+BOOST_LIB_PATH=/usr/local/opt/boost@1.60/lib
+OPENSSL_INCLUDE_PATH=/usr/local/opt/openssl/include
+OPENSSL_LIB_PATH=/usr/local/opt/openssl/lib
+BDB_INCLUDE_PATH = /opt/local/include/db48
+BDB_LIB_PATH = /opt/local/lib/db48
+MINIUPNPC_INCLUDE_PATH=/usr/local/opt/miniupnpc/include
+MINIUPNPC_LIB_PATH=/usr/local/opt/miniupnpc/lib
 
 INCLUDEPATHS= \
  -I"$(CURDIR)" \
  -I"$(CURDIR)"/obj \
- -I"$(DEPSDIR)/include" \
- -I"$(DEPSDIR)/include/db48"
-
+ -I"$(BDB_INCLUDE_PATH)" \
+ -I"$(BOOST_INCLUDE_PATH)" \
+ -I"$(OPENSSL_INCLUDE_PATH)"
+ 
 LIBPATHS= \
- -L"$(DEPSDIR)/lib" \
- -L"$(DEPSDIR)/lib/db48"
+ -L"$(BDB_LIB_PATH)" \
+ -L"$(BOOST_LIB_PATH)" \
+ -L"$(OPENSSL_LIB_PATH)"
 
-USE_UPNP:=1
+USE_UPNP:=0
 USE_IPV6:=1
+STATIC:=1
 
 LIBS= -dead_strip
 
@@ -31,14 +43,15 @@ ifdef STATIC
 TESTLIBS += \
  $(DEPSDIR)/lib/libboost_unit_test_framework-mt.a
 LIBS += \
- $(DEPSDIR)/lib/db48/libdb_cxx-4.8.a \
- $(DEPSDIR)/lib/libboost_system-mt.a \
- $(DEPSDIR)/lib/libboost_filesystem-mt.a \
- $(DEPSDIR)/lib/libboost_program_options-mt.a \
- $(DEPSDIR)/lib/libboost_thread-mt.a \
- $(DEPSDIR)/lib/libboost_chrono-mt.a \
- $(DEPSDIR)/lib/libssl.a \
- $(DEPSDIR)/lib/libcrypto.a \
+ $(BDB_LIB_PATH)/libdb_cxx-4.8.a \
+ $(BOOST_LIB_PATH)/libboost_system-mt.a \
+ $(BOOST_LIB_PATH)/libboost_filesystem-mt.a \
+ $(BOOST_LIB_PATH)/libboost_program_options-mt.a \
+ $(BOOST_LIB_PATH)/libboost_thread-mt.a \
+ $(BOOST_LIB_PATH)/libboost_chrono-mt.a \
+ $(OPENSSL_LIB_PATH)/libssl.a \
+ $(OPENSSL_LIB_PATH)/libcrypto.a \
+ $(CURDIR)/cryptopp/libcryptopp.a \
  -lz
 else
 TESTLIBS += \
@@ -112,7 +125,7 @@ endif
 ifneq (${USE_UPNP}, -)
 	DEFS += -DUSE_UPNP=$(USE_UPNP)
 ifdef STATIC
-	LIBS += $(DEPSDIR)/lib/libminiupnpc.a
+	LIBS += $(MINIUPNPC_LIB_PATH)/libminiupnpc.a
 else
 	LIBS += -lminiupnpc
 endif
