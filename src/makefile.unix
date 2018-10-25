@@ -13,33 +13,23 @@ USE_IPV6:=1
 
 LINK:=$(CXX)
 
-STATIC:=1
-
 DEFS=-DBOOST_SPIRIT_THREADSAFE -D_FILE_OFFSET_BITS=64
 
-ifeq ($(BOOST_LIB_PATH),)
-    BOOST_LIB_PATH = /usr/lib/x86_64-linux-gnu
-endif
-
 DEFS += $(addprefix -I,$(CURDIR) $(CURDIR)/obj $(BOOST_INCLUDE_PATH) $(BDB_INCLUDE_PATH) $(OPENSSL_INCLUDE_PATH))
 DEFS += $(addprefix -I,$(CURDIR) $(CURDIR)/obj $(BOOST_INCLUDE_PATH) $(BDB_INCLUDE_PATH) $(OPENSSL_INCLUDE_PATH))
-LIBS = $(addprefix -L,$(BOOST_LIB_PATH) $(BDB_LIB_PATH) $(OPENSSL_LIB_PATH)) -l pthread 
+LIBS = $(addprefix -L,$(BOOST_LIB_PATH) $(BDB_LIB_PATH) $(OPENSSL_LIB_PATH)) -l pthread -l boost_system -l boost_program_options -l boost_thread -l boost_filesystem
 
 TESTDEFS = -DTEST_DATA_DIR=$(abspath test/data)
 
 LMODE = dynamic
 LMODE2 = dynamic
 ifdef STATIC
-    $(info ************  Running static build ************)
-    LIBS += $(BOOST_LIB_PATH)/libboost_system.a $(BOOST_LIB_PATH)/libboost_program_options.a $(BOOST_LIB_PATH)/libboost_thread.a $(BOOST_LIB_PATH)/libboost_filesystem.a
     LMODE = static
-
     ifeq (${STATIC}, all)
         LMODE2 = static
     endif
 else
     TESTDEFS += -DBOOST_TEST_DYN_LINK
-    LIBS += -l boost_system -l boost_program_options -l boost_thread -l boost_filesystem
 endif
 
 # for boost 1.37, add -mt to the boost libraries
