@@ -1197,6 +1197,7 @@ void MapPort(bool)
 static const char *strMainNetDNSSeed[][3] = {
     {"Seed A", "a.seed.maxcoinproject.net"},
     {"Seed B", "b.seed.maxcoinproject.net"},
+    {"Dynamic Seed", "maxcoin.jumpingcrab.com"},
     {NULL, NULL}
 };
 
